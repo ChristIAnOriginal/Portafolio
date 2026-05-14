@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contacto · Valentina Rojas Mendoza, actriz de teatro." />
+  <title>Valentina Rojas · Contacto</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body class="page-contacto">
+
+  <div class="version-bar">
+    <a href="../index.html" class="version-bar__btn version-bar__btn--home">← Inicio</a>
+    <span class="version-bar__label">Versión</span>
+    <a href="../expresivo/index.html" class="version-bar__btn">Expresivo</a>
+    <a href="index.html" class="version-bar__btn is-active" aria-current="true">Mosaico</a>
+    <a href="../lineas/index.html" class="version-bar__btn">Líneas</a>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">VR</span>
+      <span class="nav__logo-text">Valentina Rojas</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
+      <a href="index.html">Obras</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contacto.html" class="is-active">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="contact-hero">
+    <div class="contact-hero__bg">
+      <img src="https://picsum.photos/seed/teatro-contact/1800/1200" alt="" aria-hidden="true" />
+    </div>
+    <div class="contact-hero__content">
+      <p class="bio__kicker">— Contacto</p>
+      <h1>¿Trabajamos <em>juntos?</em></h1>
+      <p>
+        Disponible para castings, montajes, talleres de voz y residencias.
+        Escríbeme y conversamos.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-grid">
+    <ul class="contact-links">
+      <li><span>Email</span><a href="mailto:hola@valentinarojas.art">hola@valentinarojas.art</a></li>
+      <li><span>Representante</span><a href="mailto:agencia@escena.art">agencia@escena.art</a></li>
+      <li><span>Instagram</span><a href="https://instagram.com" target="_blank" rel="noopener">@valentina.escena</a></li>
+      <li><span>Vimeo</span><a href="https://vimeo.com" target="_blank" rel="noopener">vimeo.com/valentinarojas</a></li>
+    </ul>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="field">
+        <label for="cf-nombre">Nombre</label>
+        <input id="cf-nombre" type="text" name="nombre" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="cf-email">Email</label>
+        <input id="cf-email" type="email" name="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="cf-asunto">Asunto</label>
+        <input id="cf-asunto" type="text" name="asunto" required />
+      </div>
+      <div class="field">
+        <label for="cf-mensaje">Mensaje</label>
+        <textarea id="cf-mensaje" name="mensaje" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar mensaje</button>
+      <p class="contact-form__status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__mark">VR</p>
+      <p>© <span id="year"></span> Valentina Rojas Mendoza</p>
+      <p>hola@valentinarojas.art</p>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio teatral de Valentina Rojas Mendoza, actriz de teatro contemporáneo y clásico." />
+  <title>Valentina Rojas Mendoza · Actriz de Teatro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="version-bar">
+    <a href="../index.html" class="version-bar__btn version-bar__btn--home">← Inicio</a>
+    <span class="version-bar__label">Versión</span>
+    <a href="index.html" class="version-bar__btn is-active" aria-current="true">Expresivo</a>
+    <a href="../mosaico/index.html" class="version-bar__btn">Mosaico</a>
+    <a href="../lineas/index.html" class="version-bar__btn">Líneas</a>
+  </div>
+
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__logo">
+      <span class="nav__logo-mark">V</span>
+      <span class="nav__logo-text">Valentina Rojas</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#obras">Obras</a>
+      <a href="#trayectoria">Trayectoria</a>
+      <a href="#contacto" class="nav__cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="hero__bg-shape hero__bg-shape--1" aria-hidden="true"></div>
+      <div class="hero__bg-shape hero__bg-shape--2" aria-hidden="true"></div>
+      <div class="hero__bg-shape hero__bg-shape--3" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__kicker">·  PORTAFOLIO TEATRAL  ·</p>
+        <h1 class="hero__title">
+          <span class="hero__title-line">Valentina</span>
+          <span class="hero__title-script">Rojas</span>
+          <span class="hero__title-line hero__title-line--end">Mendoza</span>
+        </h1>
+        <p class="hero__tagline">
+          Actriz de teatro · Voz escénica · Cuerpo en movimiento
+        </p>
+        <div class="hero__cta-row">
+          <a href="#obras" class="btn btn--primary">Ver obras</a>
+          <a href="#contacto" class="btn btn--ghost">Contratar</a>
+        </div>
+      </div>
+
+      <div class="hero__photo" aria-hidden="true">
+        <div class="hero__photo-frame">
+          <img src="https://picsum.photos/seed/teatro-hero/640/820" alt="" />
+        </div>
+        <div class="hero__photo-sticker">
+          <span>desde 2014</span>
+        </div>
+      </div>
+
+      <a href="#sobre-mi" class="hero__scroll" aria-label="Bajar a Sobre mí">
+        <span>scroll</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <section class="about" id="sobre-mi">
+      <div class="about__grid">
+        <div class="about__visual">
+          <div class="about__photo about__photo--main">
+            <img src="https://picsum.photos/seed/teatro-bio/500/640" alt="Valentina en escena, retrato cercano" />
+          </div>
+          <div class="about__photo about__photo--small">
+            <img src="https://picsum.photos/seed/teatro-bio2/360/360" alt="Valentina ensayando una escena" />
+          </div>
+          <p class="about__quote">
+            <span class="about__quote-mark">“</span>
+            El teatro me enseñó a respirar de muchas formas distintas.
+          </p>
+        </div>
+
+        <div class="about__text">
+          <p class="section__kicker">Sobre mí</p>
+          <h2 class="section__title">Cuerpo, voz y memoria<br/><em>al servicio del escenario.</em></h2>
+
+          <p>
+            Soy actriz formada en la <strong>Escuela Nacional de Arte Dramático</strong>, con
+            diez años de trayectoria entre el teatro clásico y la dramaturgia
+            contemporánea. He trabajado con compañías independientes en montajes
+            que cruzan texto, danza-teatro y performance.
+          </p>
+          <p>
+            Mi búsqueda está en los <em>personajes que habitan el silencio</em>:
+            mujeres que cargan historias densas, cuerpos que dicen lo que la
+            palabra no alcanza. Creo en el teatro como territorio político y
+            como ritual.
+          </p>
+
+          <ul class="about__tags">
+            <li>Teatro clásico</li>
+            <li>Dramaturgia contemporánea</li>
+            <li>Danza-teatro</li>
+            <li>Voz escénica</li>
+            <li>Performance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="works" id="obras">
+      <div class="works__head">
+        <p class="section__kicker">Obras</p>
+        <h2 class="section__title">Selección de <em>montajes</em></h2>
+        <p class="works__intro">
+          Una muestra de los trabajos que han marcado mi recorrido: desde Lorca
+          hasta autoras contemporáneas. Cada montaje, una pregunta abierta.
+        </p>
+      </div>
+
+      <div class="works__filter" role="tablist" aria-label="Filtrar obras">
+        <button class="works__filter-btn is-active" data-filter="all" role="tab" aria-selected="true">Todas</button>
+        <button class="works__filter-btn" data-filter="clasico" role="tab" aria-selected="false">Clásico</button>
+        <button class="works__filter-btn" data-filter="contemporaneo" role="tab" aria-selected="false">Contemporáneo</button>
+        <button class="works__filter-btn" data-filter="danza" role="tab" aria-selected="false">Danza-teatro</button>
+      </div>
+
+      <div class="works__grid">
+
+        <article class="work work--big" data-category="clasico">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-bernarda/800/1000" alt="Escena de La Casa de Bernarda Alba" /></div>
+          <div class="work__meta">
+            <span class="work__year">2024</span>
+            <span class="work__tag">Clásico</span>
+          </div>
+          <h3 class="work__title">La Casa de Bernarda Alba</h3>
+          <p class="work__role">Adela · Teatro Municipal</p>
+        </article>
+
+        <article class="work" data-category="contemporaneo">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-mar/600/700" alt="Escena de El Mar es Memoria" /></div>
+          <div class="work__meta">
+            <span class="work__year">2023</span>
+            <span class="work__tag">Contemporáneo</span>
+          </div>
+          <h3 class="work__title">El mar es memoria</h3>
+          <p class="work__role">Protagonista · Sala La Otra Orilla</p>
+        </article>
+
+        <article class="work" data-category="clasico">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-yerma/600/700" alt="Escena de Yerma" /></div>
+          <div class="work__meta">
+            <span class="work__year">2022</span>
+            <span class="work__tag">Clásico</span>
+          </div>
+          <h3 class="work__title">Yerma</h3>
+          <p class="work__role">Yerma · Festival de Teatro Clásico</p>
+        </article>
+
+        <article class="work work--wide" data-category="danza">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-danza/900/600" alt="Escena de Cuerpos que Tiemblan" /></div>
+          <div class="work__meta">
+            <span class="work__year">2023</span>
+            <span class="work__tag">Danza-teatro</span>
+          </div>
+          <h3 class="work__title">Cuerpos que tiemblan</h3>
+          <p class="work__role">Co-creadora e intérprete · Compañía Umbral</p>
+        </article>
+
+        <article class="work" data-category="contemporaneo">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-tranvia/600/700" alt="Escena de Un Tranvía Llamado Deseo" /></div>
+          <div class="work__meta">
+            <span class="work__year">2021</span>
+            <span class="work__tag">Contemporáneo</span>
+          </div>
+          <h3 class="work__title">Un tranvía llamado Deseo</h3>
+          <p class="work__role">Blanche DuBois · Teatro de Cámara</p>
+        </article>
+
+        <article class="work" data-category="danza">
+          <div class="work__img"><img src="https://picsum.photos/seed/obra-ritual/600/700" alt="Escena de Ritual de las Aves" /></div>
+          <div class="work__meta">
+            <span class="work__year">2020</span>
+            <span class="work__tag">Danza-teatro</span>
+          </div>
+          <h3 class="work__title">Ritual de las aves</h3>
+          <p class="work__role">Intérprete · Bienal de Performance</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="timeline" id="trayectoria">
+      <div class="timeline__head">
+        <p class="section__kicker">Trayectoria</p>
+        <h2 class="section__title">Una <em>década</em> en escena</h2>
+      </div>
+
+      <ol class="timeline__list">
+        <li class="timeline__item">
+          <div class="timeline__year">2024</div>
+          <div class="timeline__body">
+            <h3>Premio Nacional de Actuación</h3>
+            <p>Mejor Actriz de Reparto por <em>La Casa de Bernarda Alba</em>.</p>
+          </div>
+        </li>
+        <li class="timeline__item">
+          <div class="timeline__year">2023</div>
+          <div class="timeline__body">
+            <h3>Gira internacional</h3>
+            <p>Festival de Teatro Iberoamericano · Bogotá, Buenos Aires, Madrid.</p>
+          </div>
+        </li>
+        <li class="timeline__item">
+          <div class="timeline__year">2021</div>
+          <div class="timeline__body">
+            <h3>Residencia artística</h3>
+            <p>Casa de las Artes Escénicas · Investigación en voz y cuerpo.</p>
+          </div>
+        </li>
+        <li class="timeline__item">
+          <div class="timeline__year">2018</div>
+          <div class="timeline__body">
+            <h3>Fundación Compañía Umbral</h3>
+            <p>Co-fundadora de un colectivo independiente de danza-teatro.</p>
+          </div>
+        </li>
+        <li class="timeline__item">
+          <div class="timeline__year">2014</div>
+          <div class="timeline__body">
+            <h3>Graduación ENAD</h3>
+            <p>Escuela Nacional de Arte Dramático, mención de honor.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="contact__grid">
+        <div class="contact__intro">
+          <p class="section__kicker">Contacto</p>
+          <h2 class="section__title">¿Trabajamos<br/><em>juntos?</em></h2>
+          <p>
+            Disponible para castings, montajes, talleres de voz y residencias.
+            Escríbeme y conversamos.
+          </p>
+
+          <ul class="contact__links">
+            <li><span>Email</span><a href="mailto:hola@valentinarojas.art">hola@valentinarojas.art</a></li>
+            <li><span>Representante</span><a href="mailto:agencia@escena.art">agencia@escena.art</a></li>
+            <li><span>Instagram</span><a href="https://instagram.com" target="_blank" rel="noopener">@valentina.escena</a></li>
+            <li><span>Vimeo</span><a href="https://vimeo.com" target="_blank" rel="noopener">vimeo.com/valentinarojas</a></li>
+          </ul>
+        </div>
+
+        <form class="contact__form" id="contactForm" novalidate>
+          <label class="field">
+            <span>Nombre</span>
+            <input type="text" name="nombre" required autocomplete="name" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Asunto</span>
+            <input type="text" name="asunto" required />
+          </label>
+          <label class="field">
+            <span>Mensaje</span>
+            <textarea name="mensaje" rows="5" required></textarea>
+          </label>
+          <button type="submit" class="btn btn--primary">Enviar mensaje</button>
+          <p class="contact__form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__mark">VR</p>
+      <p class="footer__text">© <span id="year"></span> Valentina Rojas Mendoza · Todos los derechos reservados</p>
+      <p class="footer__credit">Hecho con tinta y telón.</p>
+    </div>
+  </footer>
+
+  <div class="theme-switch" id="themeSwitch">
+    <button class="theme-switch__toggle" id="themeToggle" aria-haspopup="true" aria-expanded="false" aria-controls="themePanel">
+      <span class="theme-switch__icon" aria-hidden="true">◐</span>
+      <span class="theme-switch__label">Tema</span>
+    </button>
+
+    <div class="theme-panel" id="themePanel" role="menu" aria-label="Selector de tema visual" hidden>
+      <p class="theme-panel__title">Estilo visual</p>
+
+      <button class="theme-option is-active" data-theme="expresivo" role="menuitemradio" aria-checked="true">
+        <span class="theme-option__swatch">
+          <i style="background:#8B1E3F"></i>
+          <i style="background:#E8B22A"></i>
+          <i style="background:#E63462"></i>
+          <i style="background:#F5EDE0"></i>
+        </span>
+        <span class="theme-option__text">
+          <strong>Artístico expresivo</strong>
+          <em>Colores vibrantes, collage teatral</em>
+        </span>
+      </button>
+
+      <button class="theme-option" data-theme="clasico" role="menuitemradio" aria-checked="false">
+        <span class="theme-option__swatch">
+          <i style="background:#0B0908"></i>
+          <i style="background:#7A1C2A"></i>
+          <i style="background:#C9A961"></i>
+          <i style="background:#EDE3D0"></i>
+        </span>
+        <span class="theme-option__text">
+          <strong>Clásico teatral</strong>
+          <em>Telón, dorado antiguo, sobrio</em>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

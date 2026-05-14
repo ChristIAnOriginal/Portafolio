@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio teatral de Valentina Rojas Mendoza · Galería de obras en mosaico." />
+  <title>Valentina Rojas · Obras</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/mosaic.css" />
+</head>
+<body class="page-mosaic">
+
+  <div class="version-bar">
+    <a href="../index.html" class="version-bar__btn version-bar__btn--home">← Inicio</a>
+    <span class="version-bar__label">Versión</span>
+    <a href="../expresivo/index.html" class="version-bar__btn">Expresivo</a>
+    <a href="index.html" class="version-bar__btn is-active" aria-current="true">Mosaico</a>
+    <a href="../lineas/index.html" class="version-bar__btn">Líneas</a>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">VR</span>
+      <span class="nav__logo-text">Valentina Rojas</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
+      <a href="index.html" class="is-active">Obras</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <div>
+      <p class="intro__kicker">— Portafolio teatral</p>
+      <h1 class="intro__name">Valentina Rojas Mendoza</h1>
+    </div>
+    <p class="intro__role">Actriz · 2014 — presente</p>
+  </section>
+
+  <div class="mosaic-filter" role="tablist">
+    <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">Todas</button>
+    <button class="chip" data-filter="clasico" role="tab" aria-selected="false">Clásico</button>
+    <button class="chip" data-filter="contemporaneo" role="tab" aria-selected="false">Contemporáneo</button>
+    <button class="chip" data-filter="danza" role="tab" aria-selected="false">Danza-teatro</button>
+    <button class="chip" data-filter="shakespeare" role="tab" aria-selected="false">Shakespeare</button>
+  </div>
+
+  <main class="mosaic" id="mosaic">
+
+    <button class="tile tile--xl" data-category="clasico shakespeare"
+      data-year="2024" data-title="Hamlet" data-role="Ofelia · Teatro Real"
+      data-description="Una Ofelia incómoda, fragmentada, que se niega al lirismo. Montaje del director Andrés Linares que reescribe el coro femenino de la tragedia.">
+      <img src="https://picsum.photos/seed/teatro-hamlet/1400/1100" alt="Hamlet — Ofelia" />
+      <div class="tile__overlay">
+        <p class="tile__year">2024</p>
+        <h2 class="tile__title">Hamlet</h2>
+        <p class="tile__role">Ofelia · Teatro Real</p>
+      </div>
+    </button>
+
+    <button class="tile tile--md" data-category="clasico"
+      data-year="2024" data-title="La Casa de Bernarda Alba" data-role="Adela · Teatro Municipal"
+      data-description="La hija menor, la rebelde, la que se enciende. Una lectura contemporánea del clásico de Lorca que cruza luto y deseo.">
+      <img src="https://picsum.photos/seed/teatro-bernarda/700/900" alt="La Casa de Bernarda Alba — Adela" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2024</p>
+        <h2 class="tile__title">Bernarda Alba</h2>
+        <p class="tile__role">Adela · Teatro Municipal</p>
+      </div>
+    </button>
+
+    <button class="tile tile--tall" data-category="clasico"
+      data-year="2022" data-title="Yerma" data-role="Yerma · Festival de Teatro Clásico"
+      data-description="Yerma como ritual seco. Trabajo de cuerpo y voz que llevó al elenco a la Bienal de Sevilla.">
+      <img src="https://picsum.photos/seed/teatro-yerma/600/1300" alt="Yerma" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2022</p>
+        <h2 class="tile__title">Yerma</h2>
+        <p class="tile__role">Yerma · Festival Clásico</p>
+      </div>
+    </button>
+
+    <button class="tile tile--wide" data-category="contemporaneo"
+      data-year="2023" data-title="El mar es memoria" data-role="Protagonista · Sala La Otra Orilla"
+      data-description="Texto original de Lucía Aymara sobre el exilio y los cuerpos que regresan. Premio Mejor Dramaturgia Emergente 2023.">
+      <img src="https://picsum.photos/seed/teatro-mar/1300/700" alt="El mar es memoria" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2023</p>
+        <h2 class="tile__title">El mar es memoria</h2>
+        <p class="tile__role">Protagonista · Sala La Otra Orilla</p>
+      </div>
+    </button>
+
+    <button class="tile tile--md" data-category="contemporaneo"
+      data-year="2021" data-title="Un tranvía llamado Deseo" data-role="Blanche DuBois · Teatro de Cámara"
+      data-description="La fragilidad y el ardor de Blanche en un montaje de cámara con apenas cuatro intérpretes. Dirige María Cienfuegos.">
+      <img src="https://picsum.photos/seed/teatro-tranvia/700/900" alt="Un tranvía llamado Deseo" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2021</p>
+        <h2 class="tile__title">Un tranvía llamado Deseo</h2>
+        <p class="tile__role">Blanche · Teatro de Cámara</p>
+      </div>
+    </button>
+
+    <button class="tile tile--lg" data-category="danza"
+      data-year="2023" data-title="Cuerpos que tiemblan" data-role="Co-creadora · Compañía Umbral"
+      data-description="Pieza híbrida de danza-teatro que investiga la violencia política sobre los cuerpos. Gira por seis ciudades.">
+      <img src="https://picsum.photos/seed/teatro-cuerpos/1100/950" alt="Cuerpos que tiemblan" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2023</p>
+        <h2 class="tile__title">Cuerpos que tiemblan</h2>
+        <p class="tile__role">Co-creadora · Compañía Umbral</p>
+      </div>
+    </button>
+
+    <button class="tile tile--sm" data-category="danza"
+      data-year="2020" data-title="Ritual de las aves" data-role="Intérprete · Bienal de Performance"
+      data-description="Performance de cuarenta minutos sin palabras, basada en cantos chamánicos del altiplano. Estreno en la Bienal 2020.">
+      <img src="https://picsum.photos/seed/teatro-ritual/600/800" alt="Ritual de las aves" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2020</p>
+        <h2 class="tile__title">Ritual de las aves</h2>
+        <p class="tile__role">Intérprete · Bienal de Performance</p>
+      </div>
+    </button>
+
+    <button class="tile tile--md" data-category="clasico"
+      data-year="2022" data-title="Antígona" data-role="Antígona · Festival Iberoamericano"
+      data-description="Versión del clásico de Sófocles con dramaturgia revisada. Una Antígona joven que mira a cámara, que interpela al público.">
+      <img src="https://picsum.photos/seed/teatro-antigona/700/900" alt="Antígona" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2022</p>
+        <h2 class="tile__title">Antígona</h2>
+        <p class="tile__role">Antígona · Festival Iberoamericano</p>
+      </div>
+    </button>
+
+    <button class="tile tile--tall" data-category="clasico"
+      data-year="2021" data-title="Bodas de sangre" data-role="La Novia · Casa Cultural"
+      data-description="La Novia entre el deber y la pasión. Adaptación contemporánea con escenografía minimalista, dirigida por Inés Cervantes.">
+      <img src="https://picsum.photos/seed/teatro-bodas/600/1300" alt="Bodas de sangre" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2021</p>
+        <h2 class="tile__title">Bodas de sangre</h2>
+        <p class="tile__role">La Novia · Casa Cultural</p>
+      </div>
+    </button>
+
+    <button class="tile tile--sm" data-category="clasico"
+      data-year="2019" data-title="La gaviota" data-role="Nina · Teatro de Cámara"
+      data-description="Mi primer Chéjov. Nina como la joven que sueña ser actriz y descubre el precio del oficio. Una despedida y un comienzo.">
+      <img src="https://picsum.photos/seed/teatro-gaviota/600/800" alt="La gaviota — Nina" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2019</p>
+        <h2 class="tile__title">La gaviota</h2>
+        <p class="tile__role">Nina · Teatro de Cámara</p>
+      </div>
+    </button>
+
+    <button class="tile tile--md" data-category="clasico shakespeare"
+      data-year="2020" data-title="Macbeth" data-role="Lady Macbeth · Festival Shakespeare"
+      data-description="Una Lady Macbeth despojada de melodrama, helada y calculadora. Lecturas de cinco semanas en residencia previa al estreno.">
+      <img src="https://picsum.photos/seed/teatro-macbeth/700/900" alt="Macbeth — Lady Macbeth" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2020</p>
+        <h2 class="tile__title">Macbeth</h2>
+        <p class="tile__role">Lady Macbeth · Festival Shakespeare</p>
+      </div>
+    </button>
+
+    <button class="tile tile--wide" data-category="clasico"
+      data-year="2019" data-title="Las tres hermanas" data-role="Irina · Sala Independiente"
+      data-description="Chéjov de cámara. Irina como la hermana menor que aprende a renunciar a Moscú. Un montaje sobre la espera y el tiempo.">
+      <img src="https://picsum.photos/seed/teatro-hermanas/1300/700" alt="Las tres hermanas — Irina" loading="lazy" />
+      <div class="tile__overlay">
+        <p class="tile__year">2019</p>
+        <h2 class="tile__title">Las tres hermanas</h2>
+        <p class="tile__role">Irina · Sala Independiente</p>
+      </div>
+    </button>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__mark">VR</p>
+      <p>© <span id="year"></span> Valentina Rojas Mendoza</p>
+      <p>hola@valentinarojas.art</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" hidden>
+    <button class="lightbox__close" aria-label="Cerrar">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" aria-label="Anterior">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" aria-label="Siguiente">›</button>
+
+    <div class="lightbox__inner">
+      <figure class="lightbox__figure">
+        <img id="lightboxImg" src="" alt="" />
+      </figure>
+      <div class="lightbox__info">
+        <p class="lightbox__year"></p>
+        <h2 class="lightbox__title" id="lightboxTitle"></h2>
+        <p class="lightbox__role"></p>
+        <p class="lightbox__description"></p>
+      </div>
+    </div>
+
+    <p class="lightbox__counter"></p>
+  </div>
+
+  <script src="js/nav.js"></script>
+  <script src="js/mosaic.js"></script>
+</body>
+</html>
