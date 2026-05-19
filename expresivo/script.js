@@ -2,80 +2,14 @@
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  applyStoredTheme();
-
   document.addEventListener('DOMContentLoaded', () => {
     initYear();
     initMobileMenu();
     initScrollReveal();
-    initWorksFilter();
-    initContactForm();
-    initThemeSwitch();
+    initGalleryFilter();
+    initReelSound();
+    initAutoevalBook();
   });
-
-  function applyStoredTheme() {
-    try {
-      const saved = localStorage.getItem('vr-theme');
-      if (saved === 'clasico') {
-        document.documentElement.setAttribute('data-theme', 'clasico');
-      }
-    } catch (_) { /* localStorage blocked */ }
-  }
-
-  function initThemeSwitch() {
-    const toggle = $('#themeToggle');
-    const panel = $('#themePanel');
-    const switchEl = $('#themeSwitch');
-    const options = $$('.theme-option');
-    if (!toggle || !panel) return;
-
-    const current = document.documentElement.getAttribute('data-theme') || 'expresivo';
-    options.forEach(opt => {
-      const active = opt.dataset.theme === current;
-      opt.classList.toggle('is-active', active);
-      opt.setAttribute('aria-checked', String(active));
-    });
-
-    const openPanel = () => {
-      panel.hidden = false;
-      toggle.setAttribute('aria-expanded', 'true');
-    };
-    const closePanel = () => {
-      panel.hidden = true;
-      toggle.setAttribute('aria-expanded', 'false');
-    };
-
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      panel.hidden ? openPanel() : closePanel();
-    });
-
-    options.forEach(opt => {
-      opt.addEventListener('click', () => {
-        const theme = opt.dataset.theme;
-        if (theme === 'expresivo') {
-          document.documentElement.removeAttribute('data-theme');
-        } else {
-          document.documentElement.setAttribute('data-theme', theme);
-        }
-        try { localStorage.setItem('vr-theme', theme); } catch (_) {}
-
-        options.forEach(o => {
-          const active = o === opt;
-          o.classList.toggle('is-active', active);
-          o.setAttribute('aria-checked', String(active));
-        });
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!panel.hidden && !switchEl.contains(e.target)) closePanel();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !panel.hidden) closePanel();
-    });
-  }
 
   function initYear() {
     const el = $('#year');
@@ -108,7 +42,7 @@
   }
 
   function initScrollReveal() {
-    const targets = $$('.hero__content, .about__text, .about__visual, .works__head, .work, .timeline__item, .contact__intro, .contact__form');
+    const targets = $$('.hero__content, .about__text, .about__visual, .manifesto__inner, .selfeval__head, .evalcard, .gallery__head, .gphoto, .book__preview, .book__text, .testimonials__head, .testimonial');
     targets.forEach(el => el.classList.add('reveal'));
 
     if (!('IntersectionObserver' in window)) {
@@ -128,9 +62,129 @@
     targets.forEach(el => io.observe(el));
   }
 
-  function initWorksFilter() {
-    const buttons = $$('.works__filter-btn');
-    const works = $$('.work');
+  function initReelSound() {
+    const video = $('#reelVideo');
+    const btn = $('#reelSoundToggle');
+    if (!video || !btn) return;
+
+    const frame = $('#reelFrame');
+    const label = $('.hero__photo-sound-label', btn);
+    let userPaused = false;
+    let inView = true;
+    let burstTimer = null;
+
+    const safePlay = () => {
+      const p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    };
+
+    const sync = () => {
+      const on = !video.muted;
+      btn.classList.toggle('is-on', on);
+      btn.setAttribute('aria-pressed', String(on));
+      btn.setAttribute('aria-label', on ? 'Silenciar el reel' : 'Activar sonido del reel');
+      if (label) label.textContent = on ? 'Silenciar' : 'Sonido';
+    };
+
+    const burst = () => {
+      if (!frame) return;
+      frame.classList.remove('is-bursting');
+      // Force reflow so the animation restarts on rapid clicks
+      void frame.offsetWidth;
+      frame.classList.add('is-bursting');
+      clearTimeout(burstTimer);
+      burstTimer = setTimeout(() => frame.classList.remove('is-bursting'), 600);
+    };
+
+    // Reflect paused / playing state on the frame for the overlay
+    video.addEventListener('play', () => frame && frame.classList.remove('is-paused'));
+    video.addEventListener('pause', () => frame && frame.classList.add('is-paused'));
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      if (!video.muted) safePlay();
+      sync();
+    });
+
+    // Click on the video toggles play/pause + burst feedback
+    video.addEventListener('click', () => {
+      burst();
+      if (video.paused) {
+        userPaused = false;
+        safePlay();
+      } else {
+        userPaused = true;
+        video.pause();
+      }
+    });
+
+    // Pause when the reel scrolls out of view, resume when it comes back
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          inView = entry.isIntersecting;
+          if (inView) {
+            if (!userPaused && !document.hidden) safePlay();
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.25 });
+      io.observe(video);
+    }
+
+    // Pause when the tab loses focus
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        video.pause();
+      } else if (!userPaused && inView) {
+        safePlay();
+      }
+    });
+
+    sync();
+    if (frame) frame.classList.toggle('is-paused', video.paused);
+  }
+
+  function initAutoevalBook() {
+    const trigger = $('#openAutoevalBook');
+    const modal = $('#autoevalBook');
+    if (!trigger || !modal) return;
+
+    const closeBtn = $('#closeAutoevalBook');
+    const inner = $('.book-modal__inner', modal);
+
+    const open = () => {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('is-locked');
+      modal.scrollTop = 0;
+      if (closeBtn) closeBtn.focus();
+    };
+
+    const close = () => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('is-locked');
+      trigger.focus();
+    };
+
+    trigger.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    modal.addEventListener('click', (e) => {
+      if (!inner.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+  }
+
+  function initGalleryFilter() {
+    const buttons = $$('.gallery__filter-btn');
+    const photos = $$('.gphoto');
     if (!buttons.length) return;
 
     buttons.forEach(btn => {
@@ -143,48 +197,11 @@
           b.setAttribute('aria-selected', String(active));
         });
 
-        works.forEach(w => {
-          const show = filter === 'all' || w.dataset.category === filter;
-          w.classList.toggle('is-hidden', !show);
+        photos.forEach(p => {
+          const show = filter === 'all' || p.dataset.category === filter;
+          p.classList.toggle('is-hidden', !show);
         });
       });
-    });
-  }
-
-  function initContactForm() {
-    const form = $('#contactForm');
-    const status = $('#formStatus');
-    if (!form) return;
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const data = new FormData(form);
-      const nombre = (data.get('nombre') || '').toString().trim();
-      const email = (data.get('email') || '').toString().trim();
-      const asunto = (data.get('asunto') || '').toString().trim();
-      const mensaje = (data.get('mensaje') || '').toString().trim();
-
-      if (!nombre || !email || !asunto || !mensaje) {
-        status.textContent = 'Por favor, completa todos los campos.';
-        status.style.color = 'var(--burgundy)';
-        return;
-      }
-
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!emailOk) {
-        status.textContent = 'Revisa tu email.';
-        status.style.color = 'var(--burgundy)';
-        return;
-      }
-
-      const subject = encodeURIComponent(`[Portafolio] ${asunto}`);
-      const body = encodeURIComponent(`Hola Valentina,\n\nMi nombre es ${nombre}.\n\n${mensaje}\n\n— ${email}`);
-      window.location.href = `mailto:hola@valentinarojas.art?subject=${subject}&body=${body}`;
-
-      status.textContent = '¡Listo! Abriendo tu correo…';
-      status.style.color = 'var(--teal)';
-      form.reset();
     });
   }
 })();
