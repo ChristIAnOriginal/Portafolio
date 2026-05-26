@@ -119,6 +119,16 @@
     video.addEventListener('play', () => frame && frame.classList.remove('is-paused'));
     video.addEventListener('pause', () => frame && frame.classList.add('is-paused'));
 
+    // Hide skeleton shimmer once the first frame is ready
+    const markVideoLoaded = () => frame && frame.classList.add('is-video-loaded');
+    if (video.readyState >= 2) {
+      markVideoLoaded();
+    } else {
+      video.addEventListener('loadeddata', markVideoLoaded, { once: true });
+      video.addEventListener('canplay', markVideoLoaded, { once: true });
+      video.addEventListener('error', markVideoLoaded, { once: true });
+    }
+
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       video.muted = !video.muted;

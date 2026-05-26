@@ -283,6 +283,34 @@ button { font-family: inherit; cursor: pointer; }
   cursor: pointer;
 }
 
+/* Skeleton shimmer mientras el video carga */
+.hero__photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(245, 237, 224, 0.05) 30%,
+    rgba(232, 178, 42, 0.18) 50%,
+    rgba(245, 237, 224, 0.05) 70%
+  );
+  background-size: 220% 100%;
+  animation: galleryShimmer 1.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.hero__photo-frame.is-video-loaded::after {
+  opacity: 0;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo-frame::after { animation: none; }
+}
+
 .hero__photo-frame img,
 .hero__photo-frame video {
   width: 100%;
@@ -632,11 +660,10 @@ button { font-family: inherit; cursor: pointer; }
 
 .about__visual {
   position: relative;
-  min-height: 580px;
 }
 
 .about__photo {
-  position: absolute;
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--ink);
@@ -646,44 +673,33 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .about__photo--main {
-  top: 0;
-  left: 0;
-  width: 75%;
+  width: 92%;
+  margin: 0 auto;
   aspect-ratio: 4 / 5;
-  transform: rotate(-3deg);
+  transform: rotate(-2deg);
   box-shadow: var(--shadow-hard);
   border: 4px solid var(--ink);
-  z-index: 1;
-}
-
-.about__photo--small {
-  bottom: 0;
-  right: 0;
-  width: 50%;
-  aspect-ratio: 1;
-  transform: rotate(5deg);
-  box-shadow: 8px 8px 0 var(--magenta);
-  border: 4px solid var(--ink);
-  z-index: 2;
 }
 
 .about__quote {
   position: absolute;
-  bottom: 20px;
-  left: 0;
-  max-width: 240px;
+  bottom: -24px;
+  right: -8px;
+  max-width: 280px;
   font-family: var(--font-script);
   font-size: 22px;
-  line-height: 1.25;
+  line-height: 1.3;
   color: var(--burgundy);
   background: var(--cream);
-  padding: 16px 20px;
+  padding: 18px 22px;
   border-radius: 14px;
-  transform: rotate(-2deg);
-  box-shadow: var(--shadow-soft);
+  transform: rotate(3deg);
+  box-shadow: 8px 8px 0 var(--magenta);
+  border: 3px solid var(--ink);
   z-index: 3;
 }
 
@@ -2444,7 +2460,7 @@ body.is-locked {
   .hero__title-line--end { margin-left: 8vw; }
 
   .about__grid { grid-template-columns: 1fr; gap: 60px; }
-  .about__visual { min-height: 520px; max-width: 480px; margin: 0 auto; }
+  .about__visual { max-width: 480px; margin: 0 auto; padding-bottom: 32px; }
 
   .selfeval__grid { grid-template-columns: 1fr; gap: 40px; max-width: 560px; margin: 0 auto; }
 
