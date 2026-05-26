@@ -1172,7 +1172,9 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .gallery__more-wrap {
-  margin-top: 8px;
+  margin-top: 32px;
+  padding-top: 12px;
+  padding-bottom: 8px;
   text-align: center;
 }
 
