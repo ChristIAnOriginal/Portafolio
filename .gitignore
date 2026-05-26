@@ -5,3 +5,13 @@ desktop.ini
 node_modules/
 .vscode/
 .idea/
+
+# Local Claude Code config
+.claude/
+
+# Planning/temporary files
+**/ToBeDeleted*
+
+# Large media — hosted externally on Cloudflare R2
+resources/photos/
+resources/video/
