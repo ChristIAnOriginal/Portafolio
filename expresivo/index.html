@@ -305,61 +305,19 @@
         <p class="section__kicker">Galería</p>
         <h2 class="section__title">Imágenes en <em>escena</em></h2>
         <p class="gallery__intro">
-          Registro fotográfico de montajes, retratos profesionales y momentos
-          de ensayo en sala.
+          Registro fotográfico de mis obras, ensambles y entrenamientos.
+          Filtrá por categoría para explorar cada proceso.
         </p>
       </div>
 
-      <div class="gallery__filter" role="tablist" aria-label="Filtrar galería">
-        <button class="gallery__filter-btn is-active" data-filter="all" role="tab" aria-selected="true">Todas</button>
-        <button class="gallery__filter-btn" data-filter="escena" role="tab" aria-selected="false">Escena</button>
-        <button class="gallery__filter-btn" data-filter="retrato" role="tab" aria-selected="false">Retratos</button>
-        <button class="gallery__filter-btn" data-filter="ensayo" role="tab" aria-selected="false">Ensayos</button>
+      <div class="gallery__filter" role="tablist" aria-label="Filtrar galería" id="galleryFilter"></div>
+
+      <div class="gallery__loader" id="galleryLoader" role="status" aria-live="polite">
+        <span class="gallery__loader-spinner" aria-hidden="true"></span>
+        <span class="gallery__loader-text" id="galleryLoaderText">Cargando fotos…</span>
       </div>
 
-      <div class="gallery__grid">
-
-        <figure class="gphoto gphoto--big" data-category="escena">
-          <img src="https://picsum.photos/seed/gal-1/800/1000" alt="La Casa de Bernarda Alba, escena de Adela" />
-          <figcaption><span>La Casa de Bernarda Alba</span><em>2024 · escena</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="retrato">
-          <img src="https://picsum.photos/seed/gal-2/600/750" alt="Retrato profesional en estudio" />
-          <figcaption><span>Retrato</span><em>estudio</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="escena">
-          <img src="https://picsum.photos/seed/gal-3/600/750" alt="Yerma en festival de teatro" />
-          <figcaption><span>Yerma</span><em>2022 · escena</em></figcaption>
-        </figure>
-
-        <figure class="gphoto gphoto--wide" data-category="ensayo">
-          <img src="https://picsum.photos/seed/gal-4/900/600" alt="Ensayo de Cuerpos que tiemblan" />
-          <figcaption><span>Cuerpos que tiemblan</span><em>ensayo · Compañía Umbral</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="escena">
-          <img src="https://picsum.photos/seed/gal-5/600/750" alt="Un tranvía llamado Deseo" />
-          <figcaption><span>Un tranvía llamado Deseo</span><em>2021 · escena</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="retrato">
-          <img src="https://picsum.photos/seed/gal-6/600/750" alt="Retrato en blanco y negro" />
-          <figcaption><span>Retrato</span><em>blanco y negro</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="ensayo">
-          <img src="https://picsum.photos/seed/gal-7/600/750" alt="Entrenamiento vocal en sala" />
-          <figcaption><span>Entrenamiento vocal</span><em>ensayo</em></figcaption>
-        </figure>
-
-        <figure class="gphoto" data-category="escena">
-          <img src="https://picsum.photos/seed/gal-8/600/750" alt="Ritual de las aves en bienal" />
-          <figcaption><span>Ritual de las aves</span><em>2020 · performance</em></figcaption>
-        </figure>
-
-      </div>
+      <div class="gallery__content" id="galleryContent"></div>
     </section>
 
     <section class="book" id="book">
@@ -525,6 +483,16 @@
       <p class="footer__credit">Hecho con tinta y telón.</p>
     </div>
   </footer>
+
+  <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="gallery-lightbox__close" id="galleryLightboxClose" aria-label="Cerrar imagen">×</button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--prev" id="galleryLightboxPrev" aria-label="Imagen anterior">‹</button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--next" id="galleryLightboxNext" aria-label="Imagen siguiente">›</button>
+    <figure class="gallery-lightbox__figure">
+      <img id="galleryLightboxImg" alt="" />
+      <figcaption class="gallery-lightbox__caption" id="galleryLightboxCaption"></figcaption>
+    </figure>
+  </div>
 
   <div class="book-gallery" id="bookGallery" role="dialog" aria-modal="true" aria-labelledby="bookGalleryTitle" aria-hidden="true">
     <div class="book-gallery__inner" role="document">

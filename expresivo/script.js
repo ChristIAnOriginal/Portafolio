@@ -22,7 +22,7 @@
     initYear();
     initMobileMenu();
     initScrollReveal();
-    initGalleryFilter();
+    initGallery();
     initReelSound();
     initReelProgress();
     initAutoevalBook();
@@ -61,7 +61,7 @@
   }
 
   function initScrollReveal() {
-    const targets = $$('.hero__content, .about__text, .about__visual, .manifesto__inner, .selfeval__head, .evalcard, .gallery__head, .gphoto, .book__strip-wrap, .book__text, .evals__head, .eval-card');
+    const targets = $$('.hero__content, .about__text, .about__visual, .manifesto__inner, .selfeval__head, .evalcard, .gallery__head, .gallery__group, .book__strip-wrap, .book__text, .evals__head, .eval-card');
     targets.forEach(el => el.classList.add('reveal'));
 
     if (!('IntersectionObserver' in window)) {
@@ -673,26 +673,336 @@
     });
   }
 
-  function initGalleryFilter() {
-    const buttons = $$('.gallery__filter-btn');
-    const photos = $$('.gphoto');
-    if (!buttons.length) return;
+  // ============================================================
+  //  GALERÍA
+  // ============================================================
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
+  const GALLERY_BASE_URL = 'https://pub-0386d34e2f994f25a884385478309a44.r2.dev/GALER%C3%8DA';
+  const GALLERY_PREVIEW_COUNT = 8;
 
-        buttons.forEach(b => {
-          const active = b === btn;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-selected', String(active));
-        });
+  // Datos derivados de resources/photos-manifests/*.json
+  // Si agregás/quitás fotos a R2, actualizá estos arrays.
+  const GALLERY_DATA = [
+    {
+      slug: 'soundpainting',
+      label: 'Soundpainting',
+      folder: 'Soundpainting',
+      ext: 'jpeg',
+      count: 47
+    },
+    {
+      slug: 'noche-de-lobo',
+      label: 'Noche de Lobo',
+      folder: 'Noche de Lobo',
+      ext: 'jpg',
+      count: 45
+    },
+    {
+      slug: 'juicio-del-siglo',
+      label: 'Juicio del siglo',
+      folder: 'Juicio del siglo',
+      ext: 'jpg',
+      count: 24
+    },
+    {
+      slug: 'pronoia',
+      label: 'Pronoia',
+      folder: 'Pronoia',
+      ext: 'jpeg',
+      count: 13
+    },
+    {
+      slug: 'clown',
+      label: 'Clown',
+      folder: 'Clown',
+      ext: 'jpeg',
+      count: 8
+    },
+    {
+      slug: 'gestual',
+      label: 'Gestual',
+      folder: 'Gestual',
+      ext: 'jpeg',
+      count: 7
+    },
+    {
+      slug: 'circo',
+      label: 'Circo',
+      folder: 'Circo',
+      ext: 'jpeg',
+      count: 5
+    }
+  ];
 
-        photos.forEach(p => {
-          const show = filter === 'all' || p.dataset.category === filter;
-          p.classList.toggle('is-hidden', !show);
-        });
-      });
+  // Expande cada categoría a la lista de URLs completas
+  function buildCategoryUrls(cat) {
+    const urls = [];
+    const folder = encodeURIComponent(cat.folder);
+    const width = Math.max(2, String(cat.count).length);
+    for (let i = 1; i <= cat.count; i++) {
+      const num = String(i).padStart(width, '0');
+      urls.push(`${GALLERY_BASE_URL}/${folder}/${cat.slug}-${num}.${cat.ext}`);
+    }
+    return urls;
+  }
+
+  const GALLERY_CATEGORIES = GALLERY_DATA.map(cat => ({
+    ...cat,
+    urls: buildCategoryUrls(cat)
+  }));
+
+  function initGallery() {
+    const filter = $('#galleryFilter');
+    const content = $('#galleryContent');
+    const loader = $('#galleryLoader');
+    const loaderText = $('#galleryLoaderText');
+    if (!filter || !content) return;
+
+    let currentFilter = 'all';
+    let lightboxItems = []; // [{ url, label, indexInCat, totalInCat }]
+    let lightboxIndex = 0;
+
+    // --- Loader / progreso de carga
+    let totalToLoad = 0;
+    let loadedCount = 0;
+    let loaderResetTimer = null;
+
+    const updateLoader = () => {
+      if (!loader) return;
+      if (totalToLoad === 0) {
+        loader.classList.add('is-done');
+        return;
+      }
+      loader.classList.remove('is-done', 'is-hidden');
+      if (loaderText) {
+        const remaining = totalToLoad - loadedCount;
+        loaderText.textContent = remaining > 0
+          ? `Cargando ${remaining} de ${totalToLoad} fotos…`
+          : 'Listo';
+      }
+      if (loadedCount >= totalToLoad) {
+        loader.classList.add('is-done');
+        clearTimeout(loaderResetTimer);
+        loaderResetTimer = setTimeout(() => loader.classList.add('is-hidden'), 600);
+      }
+    };
+
+    const startLoadTracking = (count) => {
+      clearTimeout(loaderResetTimer);
+      totalToLoad = count;
+      loadedCount = 0;
+      if (loader) {
+        loader.classList.remove('is-done', 'is-hidden');
+      }
+      updateLoader();
+    };
+
+    const markImageDone = () => {
+      loadedCount++;
+      updateLoader();
+    };
+
+    // --- Render filtros
+    const totalAll = GALLERY_CATEGORIES.reduce((sum, c) => sum + c.count, 0);
+    filter.innerHTML = '';
+
+    const makeFilterBtn = (slug, label, count, active) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'gallery__filter-btn' + (active ? ' is-active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', String(!!active));
+      btn.dataset.filter = slug;
+      btn.innerHTML = `${label}<span class="gallery__filter-count">${count}</span>`;
+      btn.addEventListener('click', () => applyFilter(slug));
+      return btn;
+    };
+
+    filter.appendChild(makeFilterBtn('all', 'Todas', totalAll, true));
+    GALLERY_CATEGORIES.forEach(cat => {
+      filter.appendChild(makeFilterBtn(cat.slug, cat.label, cat.count, false));
     });
+
+    // --- Helpers de render
+    const buildImg = (url, alt) => {
+      const img = document.createElement('img');
+      img.alt = alt;
+      img.decoding = 'async';
+      img.src = url;
+      return img;
+    };
+
+    const buildItem = (url, label, indexInCat, totalInCat) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'gallery__item';
+      btn.setAttribute('aria-label', `Ampliar foto ${indexInCat + 1} de ${totalInCat} · ${label}`);
+      const img = buildImg(url, `${label} · foto ${indexInCat + 1}`);
+      const markLoaded = () => {
+        if (btn.classList.contains('is-loaded')) return;
+        btn.classList.add('is-loaded');
+        markImageDone();
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        // Cached image
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+      btn.appendChild(img);
+      return btn;
+    };
+
+    const buildGroupHead = (cat) => {
+      const head = document.createElement('div');
+      head.className = 'gallery__group-head';
+      head.innerHTML = `
+        <p class="gallery__group-kicker">Obra · Técnica</p>
+        <h3 class="gallery__group-title">${cat.label}</h3>
+        <span class="gallery__group-count">${cat.count} fotografías</span>
+      `;
+      return head;
+    };
+
+    const renderAll = () => {
+      content.innerHTML = '';
+      const previewTotal = GALLERY_CATEGORIES.reduce(
+        (sum, c) => sum + Math.min(GALLERY_PREVIEW_COUNT, c.count), 0);
+      startLoadTracking(previewTotal);
+      GALLERY_CATEGORIES.forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'gallery__group';
+        group.appendChild(buildGroupHead(cat));
+
+        const masonry = document.createElement('div');
+        masonry.className = 'gallery__masonry';
+        const preview = cat.urls.slice(0, GALLERY_PREVIEW_COUNT);
+        preview.forEach((url, idx) => {
+          const item = buildItem(url, cat.label, idx, cat.count);
+          item.addEventListener('click', () => openLightboxFromCat(cat, idx));
+          masonry.appendChild(item);
+        });
+        group.appendChild(masonry);
+
+        if (cat.count > GALLERY_PREVIEW_COUNT) {
+          const moreWrap = document.createElement('div');
+          moreWrap.className = 'gallery__more-wrap';
+          const more = document.createElement('button');
+          more.type = 'button';
+          more.className = 'gallery__more';
+          more.innerHTML = `Ver las ${cat.count} de ${cat.label} <span aria-hidden="true">→</span>`;
+          more.addEventListener('click', () => {
+            applyFilter(cat.slug);
+            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          moreWrap.appendChild(more);
+          group.appendChild(moreWrap);
+        }
+
+        content.appendChild(group);
+      });
+    };
+
+    const renderCategory = (cat) => {
+      content.innerHTML = '';
+      startLoadTracking(cat.count);
+      const group = document.createElement('div');
+      group.className = 'gallery__group';
+      group.appendChild(buildGroupHead(cat));
+
+      const masonry = document.createElement('div');
+      masonry.className = 'gallery__masonry';
+      cat.urls.forEach((url, idx) => {
+        const item = buildItem(url, cat.label, idx, cat.count);
+        item.addEventListener('click', () => openLightboxFromCat(cat, idx));
+        masonry.appendChild(item);
+      });
+      group.appendChild(masonry);
+      content.appendChild(group);
+    };
+
+    const applyFilter = (slug) => {
+      currentFilter = slug;
+      $$('.gallery__filter-btn', filter).forEach(b => {
+        const active = b.dataset.filter === slug;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      if (slug === 'all') {
+        renderAll();
+      } else {
+        const cat = GALLERY_CATEGORIES.find(c => c.slug === slug);
+        if (cat) renderCategory(cat);
+      }
+    };
+
+    // --- Lightbox
+    const lightbox = $('#galleryLightbox');
+    const lightImg = $('#galleryLightboxImg');
+    const lightCaption = $('#galleryLightboxCaption');
+    const lightClose = $('#galleryLightboxClose');
+    const lightPrev = $('#galleryLightboxPrev');
+    const lightNext = $('#galleryLightboxNext');
+
+    const openLightboxFromCat = (cat, startIdx) => {
+      lightboxItems = cat.urls.map((url, idx) => ({
+        url,
+        label: cat.label,
+        indexInCat: idx,
+        totalInCat: cat.count
+      }));
+      lightboxIndex = startIdx;
+      showLightboxImage();
+      if (lightbox) {
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('is-locked');
+        if (lightClose) lightClose.focus();
+      }
+    };
+
+    const showLightboxImage = () => {
+      if (!lightboxItems.length || !lightImg) return;
+      const item = lightboxItems[lightboxIndex];
+      lightImg.src = item.url;
+      lightImg.alt = `${item.label} · foto ${item.indexInCat + 1}`;
+      if (lightCaption) {
+        lightCaption.textContent = `${item.indexInCat + 1} / ${item.totalInCat} · ${item.label}`;
+      }
+    };
+
+    const stepLightbox = (delta) => {
+      if (!lightboxItems.length) return;
+      const total = lightboxItems.length;
+      lightboxIndex = ((lightboxIndex + delta) % total + total) % total;
+      showLightboxImage();
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('is-locked');
+      if (lightImg) lightImg.removeAttribute('src');
+    };
+
+    if (lightClose) lightClose.addEventListener('click', closeLightbox);
+    if (lightPrev) lightPrev.addEventListener('click', () => stepLightbox(-1));
+    if (lightNext) lightNext.addEventListener('click', () => stepLightbox(1));
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { e.stopPropagation(); closeLightbox(); }
+      else if (e.key === 'ArrowLeft') stepLightbox(-1);
+      else if (e.key === 'ArrowRight') stepLightbox(1);
+    });
+
+    // --- Inicial
+    renderAll();
   }
 })();
