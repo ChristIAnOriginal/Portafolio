@@ -688,11 +688,18 @@
   // ============================================================
 
   const GALLERY_BASE_URL = 'https://pub-0386d34e2f994f25a884385478309a44.r2.dev/GALER%C3%8DA';
-  const GALLERY_PREVIEW_COUNT = 8;
+  const GALLERY_PREVIEW_COUNT = 9;
 
   // Datos derivados de resources/photos-manifests/*.json
   // Si agregás/quitás fotos a R2, actualizá estos arrays.
   const GALLERY_DATA = [
+    {
+      slug: 'batalladelasestrellas',
+      label: 'Batalla de las Estrellas',
+      folder: 'BatallaDeLasEstrellas',
+      ext: 'jpeg',
+      count: 9
+    },
     {
       slug: 'soundpainting',
       label: 'Soundpainting',
@@ -768,7 +775,8 @@
     const loaderText = $('#galleryLoaderText');
     if (!filter || !content) return;
 
-    let currentFilter = 'all';
+    const DEFAULT_FILTER = GALLERY_CATEGORIES[0] ? GALLERY_CATEGORIES[0].slug : null;
+    let currentFilter = DEFAULT_FILTER;
     let lightboxItems = []; // [{ url, label, indexInCat, totalInCat }]
     let lightboxIndex = 0;
 
@@ -812,8 +820,7 @@
       updateLoader();
     };
 
-    // --- Render filtros
-    const totalAll = GALLERY_CATEGORIES.reduce((sum, c) => sum + c.count, 0);
+    // --- Render filtros (una categoría por chip; sin vista "Todas")
     filter.innerHTML = '';
 
     const makeFilterBtn = (slug, label, count, active) => {
@@ -828,9 +835,8 @@
       return btn;
     };
 
-    filter.appendChild(makeFilterBtn('all', 'Todas', totalAll, true));
     GALLERY_CATEGORIES.forEach(cat => {
-      filter.appendChild(makeFilterBtn(cat.slug, cat.label, cat.count, false));
+      filter.appendChild(makeFilterBtn(cat.slug, cat.label, cat.count, cat.slug === DEFAULT_FILTER));
     });
 
     // --- Helpers de render
@@ -875,60 +881,44 @@
       return head;
     };
 
-    const renderAll = () => {
-      content.innerHTML = '';
-      const previewTotal = GALLERY_CATEGORIES.reduce(
-        (sum, c) => sum + Math.min(GALLERY_PREVIEW_COUNT, c.count), 0);
-      startLoadTracking(previewTotal);
-      GALLERY_CATEGORIES.forEach(cat => {
-        const group = document.createElement('div');
-        group.className = 'gallery__group';
-        group.appendChild(buildGroupHead(cat));
-
-        const masonry = document.createElement('div');
-        masonry.className = 'gallery__masonry';
-        const preview = cat.urls.slice(0, GALLERY_PREVIEW_COUNT);
-        preview.forEach((url, idx) => {
-          const item = buildItem(url, cat.label, idx, cat.count);
-          item.addEventListener('click', () => openLightboxFromCat(cat, idx));
-          masonry.appendChild(item);
-        });
-        group.appendChild(masonry);
-
-        if (cat.count > GALLERY_PREVIEW_COUNT) {
-          const moreWrap = document.createElement('div');
-          moreWrap.className = 'gallery__more-wrap';
-          const more = document.createElement('button');
-          more.type = 'button';
-          more.className = 'gallery__more';
-          more.innerHTML = `Ver las ${cat.count} de ${cat.label} <span aria-hidden="true">→</span>`;
-          more.addEventListener('click', () => {
-            applyFilter(cat.slug);
-            content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-          moreWrap.appendChild(more);
-          group.appendChild(moreWrap);
-        }
-
-        content.appendChild(group);
-      });
-    };
-
     const renderCategory = (cat) => {
       content.innerHTML = '';
-      startLoadTracking(cat.count);
+      const collapsed = cat.count > GALLERY_PREVIEW_COUNT;
+      const initialCount = collapsed ? GALLERY_PREVIEW_COUNT : cat.count;
+      startLoadTracking(initialCount);
+
       const group = document.createElement('div');
       group.className = 'gallery__group';
       group.appendChild(buildGroupHead(cat));
 
       const masonry = document.createElement('div');
       masonry.className = 'gallery__masonry';
-      cat.urls.forEach((url, idx) => {
+      const appendItem = (url, idx) => {
         const item = buildItem(url, cat.label, idx, cat.count);
         item.addEventListener('click', () => openLightboxFromCat(cat, idx));
         masonry.appendChild(item);
-      });
+      };
+
+      cat.urls.slice(0, initialCount).forEach((url, idx) => appendItem(url, idx));
       group.appendChild(masonry);
+
+      if (collapsed) {
+        const moreWrap = document.createElement('div');
+        moreWrap.className = 'gallery__more-wrap';
+        const more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'gallery__more';
+        const remaining = cat.count - initialCount;
+        more.innerHTML = `Ver las ${cat.count} fotografías de ${cat.label} <span aria-hidden="true">→</span>`;
+        more.addEventListener('click', () => {
+          startLoadTracking(remaining);
+          cat.urls.slice(initialCount).forEach((url, i) => appendItem(url, initialCount + i));
+          moreWrap.remove();
+        });
+        moreWrap.appendChild(more);
+        group.appendChild(moreWrap);
+      }
+
       content.appendChild(group);
     };
 
@@ -939,12 +929,8 @@
         b.classList.toggle('is-active', active);
         b.setAttribute('aria-selected', String(active));
       });
-      if (slug === 'all') {
-        renderAll();
-      } else {
-        const cat = GALLERY_CATEGORIES.find(c => c.slug === slug);
-        if (cat) renderCategory(cat);
-      }
+      const cat = GALLERY_CATEGORIES.find(c => c.slug === slug);
+      if (cat) renderCategory(cat);
     };
 
     // --- Lightbox
@@ -1013,6 +999,6 @@
     });
 
     // --- Inicial
-    renderAll();
+    if (DEFAULT_FILTER) applyFilter(DEFAULT_FILTER);
   }
 })();

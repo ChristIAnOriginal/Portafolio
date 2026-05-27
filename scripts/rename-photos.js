@@ -6,6 +6,9 @@
  * Lee y actualiza los manifiestos en resources/photos-manifests/<Categoria>.json
  * preservando el orden original que ya esta en el JSON.
  *
+ * Si encuentra una carpeta nueva en resources/photos/ sin manifest, la crea
+ * automaticamente usando un orden natural (numerico) de los nombres actuales.
+ *
  * Uso:
  *   node scripts/rename-photos.js           -> dry-run (no toca archivos)
  *   node scripts/rename-photos.js --apply   -> ejecuta los renames
@@ -19,6 +22,8 @@ const PHOTOS_DIR = path.join(ROOT, 'resources', 'photos');
 const MANIFESTS_DIR = path.join(ROOT, 'resources', 'photos-manifests');
 const APPLY = process.argv.includes('--apply');
 
+const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.heic']);
+
 const slugify = (str) =>
   str
     .toLowerCase()
@@ -26,6 +31,17 @@ const slugify = (str) =>
     .replace(/[̀-ͯ]/g, '') // strip combining diacritics
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
+
+// "BatallaDeLasEstrellas" -> "Batalla De Las Estrellas"
+const humanizeFolder = (name) => {
+  if (/\s/.test(name)) return name;
+  return name
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
+};
+
+const naturalCompare = (a, b) =>
+  a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 
 const pad = (n, w) => String(n).padStart(w, '0');
 
@@ -40,6 +56,52 @@ if (!fs.existsSync(PHOTOS_DIR)) {
 
 console.log(APPLY ? 'Mode: APPLY (renaming files)' : 'Mode: DRY-RUN (no files touched, use --apply to execute)');
 console.log('');
+
+// Discover folders without manifest and create one
+const existingManifestFolders = new Set(
+  fs.readdirSync(MANIFESTS_DIR)
+    .filter(f => f.endsWith('.json'))
+    .map(f => {
+      const data = JSON.parse(fs.readFileSync(path.join(MANIFESTS_DIR, f), 'utf8'));
+      return data.folder;
+    })
+);
+
+const photoFolders = fs.readdirSync(PHOTOS_DIR, { withFileTypes: true })
+  .filter(d => d.isDirectory())
+  .map(d => d.name);
+
+let totalCreated = 0;
+for (const folderName of photoFolders) {
+  if (existingManifestFolders.has(folderName)) continue;
+
+  const folderPath = path.join(PHOTOS_DIR, folderName);
+  const images = fs.readdirSync(folderPath)
+    .filter(f => IMAGE_EXTS.has(path.extname(f).toLowerCase()))
+    .sort(naturalCompare);
+
+  if (images.length === 0) {
+    console.warn(`SKIP new folder (no images): ${folderName}`);
+    continue;
+  }
+
+  const label = humanizeFolder(folderName);
+  const manifest = {
+    category: label,
+    folder: folderName,
+    count: images.length,
+    images,
+  };
+  const manifestPath = path.join(MANIFESTS_DIR, `${label}.json`);
+
+  console.log(`NEW manifest: ${path.basename(manifestPath)} (${images.length} fotos)`);
+  if (APPLY) {
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+  }
+  totalCreated++;
+}
+
+if (totalCreated > 0) console.log('');
 
 const manifestFiles = fs.readdirSync(MANIFESTS_DIR).filter(f => f.endsWith('.json'));
 let totalRenamed = 0;
@@ -107,6 +169,7 @@ for (const manifestFile of manifestFiles) {
     }
     // Update manifest
     manifest.images = newImages;
+    manifest.count = newImages.length;
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
     console.log(`  manifest updated: ${manifestFile}`);
   }
@@ -118,6 +181,6 @@ for (const manifestFile of manifestFiles) {
 
 console.log('');
 console.log('============================================================');
-console.log(`Renames: ${totalRenamed}  |  Already ok: ${totalSkipped}  |  Missing: ${totalMissing}`);
+console.log(`New manifests: ${totalCreated}  |  Renames: ${totalRenamed}  |  Already ok: ${totalSkipped}  |  Missing: ${totalMissing}`);
 if (!APPLY) console.log('Dry run only. Re-run with --apply to execute.');
 else console.log('Done.');
