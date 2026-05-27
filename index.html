@@ -2,12 +2,681 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=expresivo/index.html" />
-  <link rel="canonical" href="expresivo/index.html" />
-  <title>Annia Victoria García Páez · Portafolio Teatral</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio teatral de Annia Victoria García Páez, actriz de teatro contemporáneo y clásico." />
+  <title>Annia Victoria García Páez · Actriz de Teatro</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css"  />
 </head>
 <body>
-  <p>Redirigiendo a <a href="expresivo/index.html">portafolio</a>…</p>
-  <script>window.location.replace('expresivo/index.html');</script>
+
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__logo">
+      <span class="nav__logo-mark">A</span>
+      <span class="nav__logo-text">Annia Victoria</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#declaracion">Declaración</a>
+      <a href="#autoevaluacion">Autoevaluación</a>
+      <a href="#galeria">Galería</a>
+      <a href="#book">Book</a>
+      <a href="#evaluaciones">Evaluaciones</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="hero__bg-shape hero__bg-shape--1" aria-hidden="true"></div>
+      <div class="hero__bg-shape hero__bg-shape--2" aria-hidden="true"></div>
+      <div class="hero__bg-shape hero__bg-shape--3" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__kicker">·  PORTAFOLIO TEATRAL  ·</p>
+        <h1 class="hero__title">
+          <span class="hero__title-line">Annia Victoria</span>
+          <span class="hero__title-script">García</span>
+          <span class="hero__title-line hero__title-line--end">Páez</span>
+        </h1>
+        <p class="hero__tagline">
+          Actriz de teatro · Improvisadora · Performer
+        </p>
+        <div class="hero__cta-row">
+          <a href="#galeria" class="btn btn--primary">Ver galería</a>
+          <a href="#book" class="btn btn--ghost">Ver book</a>
+        </div>
+      </div>
+
+      <div class="hero__photo">
+        <div class="hero__photo-frame" id="reelFrame">
+          <video class="hero__photo-video" id="reelVideo"
+                 autoplay muted loop playsinline preload="metadata"
+                 poster="https://picsum.photos/seed/teatro-hero/900/640">
+            <source src="https://pub-099fe5e41ec9468392c75015b7b485bb.r2.dev/videos/Reel%20portafolio.mp4" type="video/mp4" />
+          </video>
+
+          <span class="hero__photo-hint" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="12" height="12">
+              <path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+            </svg>
+            <span>Pausar reproducción</span>
+          </span>
+
+          <div class="hero__photo-state" aria-hidden="true">
+            <span class="hero__photo-state-icon">
+              <svg viewBox="0 0 24 24" width="34" height="34">
+                <path fill="currentColor" d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+            <span class="hero__photo-state-label">
+              Pausado
+              <em>Hacer clic para reanudar</em>
+            </span>
+          </div>
+
+          <span class="hero__photo-burst" aria-hidden="true"></span>
+
+          <div class="hero__photo-progress" id="reelProgress" role="slider" aria-label="Línea de tiempo del reel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <div class="hero__photo-progress-track">
+              <div class="hero__photo-progress-buffered" id="reelProgressBuffered"></div>
+              <div class="hero__photo-progress-fill" id="reelProgressFill"></div>
+              <div class="hero__photo-progress-thumb" id="reelProgressThumb"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="hero__photo-sound" id="reelSoundToggle"
+                aria-pressed="false" aria-label="Activar sonido del reel">
+          <span class="hero__photo-sound-icon" aria-hidden="true">
+            <svg class="icon icon--mute" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/>
+              <path fill="currentColor" d="M16.5 12 19 9.5l-1.4-1.4L15.1 10.6 12.6 8.1 11.2 9.5 13.7 12l-2.5 2.5 1.4 1.4 2.5-2.5 2.5 2.5L19 14.5z"/>
+            </svg>
+            <svg class="icon icon--sound" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/>
+              <path fill="currentColor" d="M14 7.6v8.8a4.5 4.5 0 0 0 0-8.8zM14 4v2.1a7 7 0 0 1 0 11.8V20a9 9 0 0 0 0-16z"/>
+            </svg>
+          </span>
+          <span class="hero__photo-sound-label">Sonido</span>
+        </button>
+      </div>
+
+      <a href="#sobre-mi" class="hero__scroll" aria-label="Bajar a Sobre mí">
+        <span>scroll</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <section class="about" id="sobre-mi">
+      <div class="about__grid">
+        <div class="about__visual">
+          <div class="about__photo about__photo--main">
+            <img src="https://pub-0386d34e2f994f25a884385478309a44.r2.dev/aboutme/aboutMe.jpeg" alt="Annia Victoria García Páez" />
+          </div>
+          <p class="about__quote">
+            <span class="about__quote-mark">“</span>
+            No puedo hablar de mi proceso artístico sin hablar de mi experiencia como mujer, porque muchas de las preguntas que sostienen mi trabajo nacieron ahí.
+          </p>
+        </div>
+
+        <div class="about__text">
+          <p class="section__kicker">Sobre mí</p>
+          <h2 class="section__title">Cuerpa, voz y memoria<br/><em>al servicio del escenario.</em></h2>
+
+          <p>
+            Soy artista escénica formada en la <strong>Pontificia Universidad
+            Javeriana de Bogotá</strong>. Mi práctica nace de la improvisación,
+            el cuerpo y la creación escénica como espacios de <em>presencia y
+            resistencia</em>. Mi búsqueda atraviesa preguntas sobre las mujeres,
+            la memoria y las formas en las que el cuerpo guarda, resiste y
+            transforma lo vivido.
+          </p>
+          <p>
+            Creo en una escena donde el cuerpo habla antes que la palabra;
+            un territorio <em>político, sensible y profundamente humano</em>.
+          </p>
+
+          <ul class="about__tags">
+            <li>Improvisación</li>
+            <li>Suzuki</li>
+            <li>Clown</li>
+            <li>Danza</li>
+            <li>Circo</li>
+            <li>Teatro gestual</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto" id="declaracion">
+      <div class="manifesto__inner">
+        <p class="section__kicker">Declaración de artista</p>
+        <h2 class="section__title">Abrir <em>la grieta.</em></h2>
+
+        <div class="manifesto__body">
+          <p class="manifesto__lead">
+            Mi práctica nace de la cuerpa: un territorio vivo donde habitan la
+            memoria, la intuición, el deseo, la rabia y la resistencia.
+          </p>
+
+          <p>
+            Un espacio que contiene historia y que se transforma cada vez que
+            entra en escena. Trabajo desde lo que se siente antes de poder
+            explicarse: desde la presencia, desde la energía que atraviesa y
+            sostiene.
+          </p>
+
+          <p>
+            La escena es un lugar atravesado por miradas, jerarquías y
+            estructuras que operan incluso cuando no se nombran. Mi trabajo se
+            instala ahí, en ese cruce.
+          </p>
+
+          <blockquote class="manifesto__quote">
+            Me interesa abrir fisuras. Desplazar la forma en la que se miran
+            las cuerpas. Alterar la comodidad.
+          </blockquote>
+
+          <p>
+            Desde la improvisación, el gesto y la acción construyo un lenguaje
+            donde la mujer decide, escucha y crea en relación con otros
+            cuerpos. Una práctica que se mueve entre la potencia física y la
+            sensibilidad.
+          </p>
+
+          <p>
+            Mi trabajo es político porque está atravesado por mi experiencia
+            como mujer. Por una historia que se inscribe en el cuerpo y que
+            aparece en la escena de forma inevitable. Por una necesidad de
+            nombrar, de exponer, de transformar.
+          </p>
+
+          <div class="manifesto__verse">
+            <p>El cuerpo en escena habla.</p>
+            <p>Desnudo o vestido.</p>
+            <p>Gritando o en silencio.</p>
+          </div>
+
+          <p>
+            Me interesa ese lugar donde algo se desordena, donde la escena
+            deja de ser control y aparece lo vivo. Creo en el arte como un
+            espacio de resistencia y de posibilidad: un lugar donde se pueden
+            ensayar otras formas de estar, de relacionarse y de crear.
+          </p>
+
+          <div class="manifesto__verse">
+            <p>Mi práctica abre preguntas.</p>
+            <p>Sostiene tensiones.</p>
+            <p>Habita lo que no se resuelve.</p>
+          </div>
+
+          <div class="manifesto__verse manifesto__verse--final">
+            <p>Creo desde un cuerpo presente.</p>
+            <p>Desde una voz en construcción.</p>
+            <p>Desde la decisión de estar.</p>
+            <p>Desde el consentimiento.</p>
+            <p>Desde la libertad.</p>
+          </div>
+        </div>
+
+        <p class="manifesto__sign">— Annia Victoria García Páez</p>
+      </div>
+    </section>
+
+    <section class="selfeval" id="autoevaluacion">
+      <div class="selfeval__head">
+        <p class="section__kicker">Autoevaluación</p>
+        <h2 class="section__title">Lo que <em>sostengo</em>, lo que <em>busco</em>.</h2>
+        <p class="selfeval__intro">
+          Una mirada honesta sobre el lugar desde donde trabajo hoy y sobre lo
+          que sigo entrenando.
+        </p>
+      </div>
+
+      <div class="selfeval__grid">
+
+        <article class="evalcard evalcard--strong">
+          <span class="evalcard__num">01</span>
+          <h3 class="evalcard__title">El camino</h3>
+          <p class="evalcard__lead">De la danza a la improvisación, sin línea recta.</p>
+          <ul class="evalcard__list">
+            <li>Entré queriendo ser bailarina y descubrí que mi cuerpo latino no encajaba en un estándar eurocentrista.</li>
+            <li>Pasé por ballet, contemporáneo, jazz, tap y danzas tradicionales antes de encontrar mi lenguaje.</li>
+            <li>Aprendí a estar sola, a no dejar que el grupo decidiera por mí y a confiar en mi proceso.</li>
+            <li>Sigo amando la danza, pero ya no la habito desde la competencia ni desde el ego.</li>
+          </ul>
+        </article>
+
+        <article class="evalcard evalcard--growth">
+          <span class="evalcard__num">02</span>
+          <h3 class="evalcard__title">Lo que me sostiene</h3>
+          <p class="evalcard__lead">Tres prácticas que me cambiaron la vida.</p>
+          <ul class="evalcard__list">
+            <li>El yoga me enseñó a respirar, a regularme y a hablarme distinto.</li>
+            <li>Suzuki me devolvió fuerza, estructura y presencia cuando estaba rota por dentro.</li>
+            <li>La improvisación me dio escucha, juego y el permiso de equivocarme en escena.</li>
+            <li>Cuerpo y nuevos medios fue la semilla feminista que ya no se fue.</li>
+          </ul>
+        </article>
+
+        <article class="evalcard evalcard--next">
+          <span class="evalcard__num">03</span>
+          <h3 class="evalcard__title">Hacia dónde voy</h3>
+          <p class="evalcard__lead">Improvisación, cuerpa y posición política.</p>
+          <ul class="evalcard__list">
+            <li>Soy una artista que trabaja desde la cuerpa, la improvisación y una mirada feminista.</li>
+            <li>ImproFéminas: mi espacio con cinco mujeres para entrenar, crear y competir desde el cuidado.</li>
+            <li>En julio empiezo mi segundo diplomado, con enfoque en improvisación gestual.</li>
+            <li>Quiero seguir abriendo lugares donde otras mujeres puedan habitarse sin miedo.</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="selfeval__deeper">
+        <p class="selfeval__deeper-text">
+          Detrás de estas tres tarjetas hay un proceso largo. Escribí la
+          autoevaluación completa como un recorrido por todo lo que cambió
+          en mí desde primer semestre hasta hoy.
+        </p>
+        <button type="button" class="btn btn--primary selfeval__deeper-btn" id="openAutoevalBook" aria-haspopup="dialog" aria-controls="autoevalBook">
+          <span>Leer mi proceso completo</span>
+          <span class="selfeval__deeper-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="gallery" id="galeria">
+      <div class="gallery__head">
+        <p class="section__kicker">Galería</p>
+        <h2 class="section__title">Imágenes en <em>escena</em></h2>
+        <p class="gallery__intro">
+          Registro fotográfico de mis obras, ensambles y entrenamientos.
+          Seleccione una categoría para explorar cada proceso.
+        </p>
+      </div>
+
+      <div class="gallery__filter" role="tablist" aria-label="Filtrar galería" id="galleryFilter"></div>
+
+      <div class="gallery__loader" id="galleryLoader" role="status" aria-live="polite">
+        <span class="gallery__loader-spinner" aria-hidden="true"></span>
+        <span class="gallery__loader-text" id="galleryLoaderText">Cargando fotos…</span>
+      </div>
+
+      <div class="gallery__content" id="galleryContent"></div>
+    </section>
+
+    <section class="book" id="book">
+      <div class="book__inner">
+
+        <div class="book__text">
+          <p class="section__kicker">Book actoral</p>
+          <h2 class="section__title">Mi book <em>actoral</em>, en imágenes.</h2>
+          <p>
+            Una selección de fotografías que dialogan con mi trabajo escénico:
+            cuerpo, gesto, mirada y presencia. Desplace las imágenes hacia la
+            derecha o abra la galería completa para ver el book entero.
+          </p>
+
+          <ul class="book__specs">
+            <li><span>Fotografías</span><strong id="bookCountStat">— imágenes</strong></li>
+            <li><span>Sesión</span><strong>2025 · Bogotá</strong></li>
+            <li><span>Visualización</span><strong>Scroll · Galería</strong></li>
+          </ul>
+
+          <div class="book__cta-row">
+            <button type="button" class="btn btn--primary" id="openBookGallery" aria-haspopup="dialog" aria-controls="bookGallery">
+              <span>Ver book completo</span>
+              <span class="book__cta-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="book__strip-wrap">
+          <div class="book__strip" id="bookStrip" role="list" aria-label="Previsualización del book actoral"></div>
+          <button type="button" class="book__strip-arrow book__strip-arrow--prev" id="bookStripPrev" aria-label="Foto anterior">‹</button>
+          <button type="button" class="book__strip-arrow book__strip-arrow--next" id="bookStripNext" aria-label="Foto siguiente">›</button>
+          <p class="book__strip-hint">Seleccione una imagen para ampliarla</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="evals" id="evaluaciones">
+      <div class="evals__head">
+        <p class="section__kicker">Evaluaciones</p>
+        <h2 class="section__title">Lo que han dicho <em>sobre mi trabajo</em>.</h2>
+        <p class="evals__intro">
+          Devoluciones de compañeros y maestros que han acompañado mi proceso
+          en la carrera. Seleccione cualquier tarjeta para leer la evaluación completa.
+        </p>
+      </div>
+
+      <div class="evals__filter" role="tablist" aria-label="Filtrar evaluaciones">
+        <button class="evals__filter-btn is-active" data-filter="all" role="tab" aria-selected="true">Todas</button>
+        <button class="evals__filter-btn" data-filter="pares" role="tab" aria-selected="false">Pares</button>
+        <button class="evals__filter-btn" data-filter="profesores" role="tab" aria-selected="false">Profesores</button>
+      </div>
+
+      <div class="evals__grid">
+
+        <article class="eval-card eval-card--par" data-category="pares" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="eval-card__head">
+            <span class="eval-card__badge">Par</span>
+            <span class="eval-card__year">2022 · presente</span>
+          </div>
+          <h3 class="eval-card__author">Sebastián Arbeláez</h3>
+          <p class="eval-card__role">Compañero de carrera · Artes Escénicas</p>
+          <p class="eval-card__preview">
+            A Annia Victoria García la conocí cuando entramos a primer semestre
+            de la carrera de Artes Escénicas. Era el año 2022, un momento lleno
+            de incertidumbre, emoción y nuevos comienzos…
+          </p>
+          <span class="eval-card__cta">Leer evaluación <span aria-hidden="true">→</span></span>
+          <div class="eval-card__full" hidden>
+            <p>A Annia Victoria García la conocí cuando entramos a primer semestre de la carrera de Artes Escénicas. Era el año 2022, un momento lleno de incertidumbre, emoción y nuevos comienzos. Recuerdo que desde el primer momento se me hizo una persona muy peculiar, de esas que llaman la atención sin necesidad de hacer demasiado ruido, pero que tienen una presencia única.</p>
+            <p>No entablamos una amistad desde el día cero, pero con el paso de los días y las semanas, la vida universitaria nos fue acercando poco a poco. Entre ensayos, trabajos, clases exigentes y momentos de vulnerabilidad propios de quienes apenas empiezan este camino, nuestra conexión se fue fortaleciendo hasta volverse una amistad muy significativa para mí.</p>
+            <p>Como fue nuestro primer semestre, todo era nuevo: los ritmos de las clases, las exigencias físicas y emocionales, y también el descubrimiento de nuestras propias capacidades. En ese proceso, nos apoyamos mutuamente en cada paso. Compartimos aprendizajes y desafíos en clases de danza, ballet, contemporáneo, actuación y puesta en escena. Fueron espacios donde no solo crecimos como artistas, sino también como personas.</p>
+            <p>Con el tiempo, Annia se convirtió en una colega que admiro, con la que he tenido la oportunidad de actuar y compartir la escena. Su sensibilidad, su compromiso y su forma de ver el arte me han inspirado de forma significativa. Es una persona que no solo se entrega a lo que hace, sino que también transmite una energía auténtica que impacta a quienes la rodean.</p>
+            <p>Un momento particularmente significativo en el que pude evidenciar con mayor claridad el talento y la autenticidad de Annia fue durante una clase de improvisación teatral en el año 2025, bajo la dirección del profesor Leonardo Caicedo. En ese espacio académico, que exigía no solo habilidades técnicas sino también una gran apertura creativa, Annia destacó de una manera sobresaliente. Fue allí donde realmente pude dimensionar su potencial: por un lado, tiene la capacidad de generar risa de manera natural en sus compañeros, y por otro, logra sorprender constantemente con la riqueza de sus propuestas creativas. A lo largo de las clases, demostró una gran destreza en las técnicas de improvisación, aportando ideas espontáneas, frescas y originales que fortalecían cada ejercicio. Recuerdo que muchos compañeros buscaban trabajar con ella, precisamente por esa facilidad que tiene para construir situaciones escénicas desde lo inesperado, logrando equilibrar lo cómico con lo estructuralmente sólido. Su capacidad para transformar una idea simple en una escena dinámica y significativa era evidente, y no pasó desapercibida para el profesor, quien en varias ocasiones destacó y felicitó su desempeño.</p>
+            <p>Este potencial la llevó posteriormente a crear su propio grupo de improvisación, lo cual habla de su iniciativa, liderazgo y compromiso con su proceso artístico. Asimismo, tuve la oportunidad de verla en su ensamble de IMPRO, donde nuevamente demostró su habilidad y dominio en este campo.</p>
+            <p>Adicionalmente, compartimos la clase de actuación para la cámara, también el año pasado, una experiencia que también me permitió admirar otra faceta de su talento. En una de las escenas que debíamos grabar, interpretábamos una ruptura de pareja. Fue realmente impactante observar cómo Annia lograba sostener el llanto de manera continua y verosímil en cada repetición de la escena, manteniendo intacta su intención emocional. Este tipo de trabajo requiere un alto nivel de concentración y sensibilidad, cosa que yo no pude alcanzar. Como compañero de escena, fue una experiencia que me sorprendió y me permitió reconocer aún más su disciplina y compromiso por el arte.</p>
+            <p>Hoy puedo decir con certeza que haber coincidido con Annia en este camino fue muy gratificante. Su presencia ha marcado mi experiencia en la carrera de una manera muy especial, y estoy seguro de que seguirá dejando huella en cada espacio en el que decida estar.</p>
+          </div>
+        </article>
+
+        <article class="eval-card eval-card--par" data-category="pares" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="eval-card__head">
+            <span class="eval-card__badge">Par</span>
+            <span class="eval-card__year">2025 · ImproFéminas</span>
+          </div>
+          <h3 class="eval-card__author">Valeria Álvarez Acero</h3>
+          <p class="eval-card__role">Compañera de improvisación · ImproFéminas</p>
+          <p class="eval-card__preview">
+            Conocí a Annia en la clase de improvisación teatral en el primer
+            semestre de 2025, yo estaba en cuarto semestre y ella en sexto.
+            Desde los primeros juegos y ejercicios de entrenamiento de impro,
+            me sorprendió mucho su espontaneidad…
+          </p>
+          <span class="eval-card__cta">Leer evaluación <span aria-hidden="true">→</span></span>
+          <div class="eval-card__full" hidden>
+            <p>Conocí a Annia en la clase de improvisación teatral en el primer semestre de 2025, yo estaba en cuarto semestre y ella en sexto. Desde los primeros juegos y ejercicios de entrenamiento de impro, me sorprendió mucho su espontaneidad, la cual viene de un lugar muy auténtico de sí misma; ella hacía cosas que no se le ocurrían a nadie más y, por ello, siempre resaltaba en la clase. Desde el primer momento admiré su capacidad para contar historias, para escuchar, crear personajes y jugar con su gran e ilimitada imaginación. Sin embargo, en la clase no fuimos cercanas, fue más adelante cuando empezamos a conocernos mejor y desarrollar nuestra amistad.</p>
+            <p>Un día, durante las vacaciones de mitad de año, Annia me escribió diciendo que quería formar un grupo de improvisación para entrenar y presentarnos. Yo le respondí inmediatamente, accedí emocionada y halagada porque alguien tan buena como ella había decidido confiar en mis habilidades para la impro. Empezamos a entrenar y, con el tiempo, fuimos conformando ImproFéminas. Allí he conocido su faceta de liderazgo: ella conoce muy bien las herramientas de la impro, es consciente del espacio, del estatus, de las cosas que necesita la historia para tener una buena plataforma, un nudo y un final, y ha sabido cómo transmitirnos ese conocimiento. Ha sido una guía para nosotras, ha potenciado nuestras habilidades y siempre quiere superarse a sí misma. Sé que la impro es un espacio de juego y libertad para ella, y poco a poco ha ido abriéndose campo en varios formatos como el Show de las estrellas, donde todo su esfuerzo y talento han sido recompensados.</p>
+            <p>Asimismo, el año pasado hice un ensamble de impro con ella dirigido por Leonardo Caicedo, en el cual nos acompañamos, fuimos creciendo en la impro, y me di cuenta de la capacidad que tiene con los acentos y de hacer brillar al otro; ella me ha enseñado a construir en conjunto, a darle el lugar al otro para brillar juntos, a tomarme el tiempo y seguir mis impulsos. Por otro lado, ese mismo semestre vi la técnica de Clown y el laboratorio de Exploración Audiovisual con ella. En Clown descubrí que se le da muy bien la comedia: hay aspectos cómicos en ella que surgen de manera natural y espontánea, sabe cómo transformarse y reírse de sí misma, no teme exponerse y se desenvuelve bien con la técnica. En Exploración Audiovisual conocí sus ganas de estar aprendiendo cosas nuevas constantemente, de trabajar en equipo y resolver cualquier inconveniente que se presente. En esa clase realizamos un cortometraje basado en nuestras vidas personales, conocí sus facetas más sensibles y logré entender las cosas que la atravesaban al momento de crear; allí fortalecimos nuestro vínculo, nos dimos cuenta que hacíamos un buen equipo y empezamos a soñar con proyectos artísticos que podríamos crear.</p>
+            <p>En verdad, agradezco mucho haber conocido a Annia en la carrera. He aprendido mucho de ella y nos hemos acompañado en los mejores y los peores momentos. Admiro mucho su determinación y pasión. Annia es una persona muy comprometida con cualquier proyecto que se presente, eso demuestra el amor que siente por su carrera; es muy decidida, sabe lo que quiere y estoy segura de que logrará cualquier cosa que se proponga. Pero, ante todo, Annia es una gran artista porque es una gran persona: está abierta a escuchar a los demás, es empática, amorosa y generosa, defiende sus valores, es fiel a sí misma y sabe poner los límites necesarios, cree en sí misma y está dispuesta a defender su lugar como mujer en el mundo y a través del arte. Cree en el magnífico poder de las mujeres para crear y, sin duda, es algo que vive presente en su arte como actriz e improvisadora. Todo lo que ella es, lo manifiesta en su arte, y es lo que ha dejado huella en mí y en todos los que la han conocido.</p>
+          </div>
+        </article>
+
+        <article class="eval-card eval-card--prof" data-category="profesores" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="eval-card__head">
+            <span class="eval-card__badge">Profesor</span>
+            <span class="eval-card__year">2024 – 2025</span>
+          </div>
+          <h3 class="eval-card__author">Ernesto Martínez Correa</h3>
+          <p class="eval-card__role">Docente · Técnica Suzuki y Viewpoints · P. Javeriana</p>
+          <p class="eval-card__preview">
+            Annia ha sido una estudiante que desde el primer encuentro con los
+            entrenamientos Suzuki y Viewpoints en 2024, y en su segundo curso en
+            2025, conectó muy positivamente con lo planteado por ellos…
+          </p>
+          <span class="eval-card__cta">Leer evaluación <span aria-hidden="true">→</span></span>
+          <div class="eval-card__full" hidden>
+            <p>Annia ha sido una estudiante que desde el primer encuentro con los entrenamientos Suzuki y Viewpoints en 2024, y en su segundo curso en 2025, conectó muy positivamente con lo planteado por ellos, mostrando gran interés y entrega en profundizarlos.</p>
+            <p>Tiene una gran inquietud de llevar a buen desarrollo su carrera profesional, siendo proactiva y generadora de proyectos propios y, para esto, dispone de generosidad, disciplina y rigurosidad. Estas habilidades la llevan a encarar los obstáculos que los entrenamientos le ponen al frente teniendo la seguridad de que con el trabajo y la dedicación en ellos la llevarán a comprenderlos y encontrarles una vía de liberación.</p>
+            <p>Es una persona constante y que toma muchos riesgos en la escena y en el entrenamiento. Su carácter hace que sea una estudiante que hace sentir su presencia fuera y dentro de la escena. En el buen sentido de la palabra goza de ambición artística y se pone altas metas académicas y profesionales. Encara estas metas, las relaciones con sus compañeros y la relación con el nuevo conocimiento con amplitud, generosidad y alegría, elementos que la llevan a trabajar colaborativa y positivamente.</p>
+            <p>A sus compañeros siempre les propuso niveles altos de disposición, juego y riesgo que muchas veces ayudó a despertarlos e invitarlos a dar pasos riesgosos y seguros hacia adelante en su creación.</p>
+            <p>Me alegra que ya esté terminando exitosamente su etapa académica y que entre con tan buenas herramientas y disposición al mundo profesional. Será ganancia para el arte.</p>
+            <p class="eval-card__signature">— Ernesto Martínez Correa<br>Docente de la Técnica Suzuki y Viewpoints<br>Universidad Pontificia Javeriana</p>
+          </div>
+        </article>
+
+        <article class="eval-card eval-card--prof" data-category="profesores" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="eval-card__head">
+            <span class="eval-card__badge">Profesor</span>
+            <span class="eval-card__year">Improvisación teatral</span>
+          </div>
+          <h3 class="eval-card__author">Leonardo E. Caicedo Zaza</h3>
+          <p class="eval-card__role">Docente · Improvisación teatral &amp; Soundpainting</p>
+          <p class="eval-card__preview">
+            A lo largo del proceso, Annia se consolidó como una estudiante con
+            una presencia escénica singular, destacándose desde sus primeras
+            intervenciones en Soundpainting y, posteriormente, en la técnica
+            de improvisación…
+          </p>
+          <span class="eval-card__cta">Leer evaluación <span aria-hidden="true">→</span></span>
+          <div class="eval-card__full" hidden>
+            <p>A lo largo del proceso, Annia se consolidó como una estudiante con una presencia escénica singular, destacándose desde sus primeras intervenciones en Soundpainting y, posteriormente, en la técnica de improvisación. Su forma de proponer en escena se caracteriza por una creatividad orgánica, una identidad clara y una capacidad de generar recordación en el espectador. En su trabajo se percibe aquello que, desde una perspectiva más poética, puede denominarse “duende”: una cualidad difícil de forzar, pero evidente en su manera de habitar la escena.</p>
+            <p>Durante la fase inicial en técnica de improvisación, mostró un desempeño sobresaliente, siendo una de las estudiantes cuya participación generaba expectativa dentro del grupo por la originalidad y autenticidad de sus propuestas. Esta cualidad, sin embargo, se vio tensionada en el trabajo colectivo del formato match, donde la falta de cohesión grupal afectó la fluidez del proceso. En ese contexto, Annia experimentó un momento de frustración que impactó su desempeño, evidenciando como aspecto a fortalecer la capacidad de sostener y liderar en situaciones de bloqueo escénico colectivo.</p>
+            <p>No obstante, este momento representó un punto de inflexión importante. Annia logró reconfigurar su lugar dentro del grupo, comprendiendo elementos esenciales del lenguaje del match, como la distribución de roles, el manejo de la energía, la construcción narrativa conjunta y el valor de la generosidad en escena. Este aprendizaje se reflejó en su capacidad posterior de liderar desde lo creativo y potenciar el trabajo de los demás.</p>
+            <p>En el ensamble, su proceso fue claramente ascendente. Se posicionó como una figura de apoyo dentro del grupo, especialmente con compañeros de menor experiencia, aportando desde una actitud tranquila, propositiva y con un criterio crítico orientado a la construcción. Su capacidad de cuestionar desde un lugar productivo contribuyó significativamente al desarrollo del formato y a la consolidación del trabajo colectivo.</p>
+            <p>Es importante resaltar que su participación simultánea en el diplomado de improvisación fortaleció su proceso, evidenciándose una integración de herramientas que puso al servicio del grupo con generosidad, manteniendo siempre una actitud abierta y colaborativa.</p>
+            <p>Asimismo, en el contexto del campeonato de improvisación, donde compartimos escenario, Annia confirmó su crecimiento, mostrando una mayor solidez escénica, capacidad de conexión y una presencia que permanece en la memoria del espectador.</p>
+            <p>Como aspectos a fortalecer, se recomienda profundizar en la precisión técnica, especialmente en el trabajo vocal (acentos), la transformación corporal de personajes, el uso del espacio y el desarrollo de herramientas narrativas.</p>
+            <p>En términos generales, Annia es una artista con una identidad clara, un proceso en evolución constante y un alto potencial dentro del campo de la improvisación, cuya presencia escénica, sostenida en su autenticidad, la proyecta de manera significativa hacia el ámbito profesional.</p>
+            <p class="eval-card__signature">— Leonardo Esteban Caicedo Zaza</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__mark">AV</p>
+      <p class="footer__text">© <span id="year"></span> Annia Victoria García Páez · Todos los derechos reservados</p>
+      <p class="footer__credit">Un archivo vivo de mi proceso artístico.</p>
+    </div>
+  </footer>
+
+  <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="gallery-lightbox__close" id="galleryLightboxClose" aria-label="Cerrar imagen">×</button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--prev" id="galleryLightboxPrev" aria-label="Imagen anterior">‹</button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--next" id="galleryLightboxNext" aria-label="Imagen siguiente">›</button>
+    <figure class="gallery-lightbox__figure">
+      <img id="galleryLightboxImg" alt="" />
+      <figcaption class="gallery-lightbox__caption" id="galleryLightboxCaption"></figcaption>
+    </figure>
+  </div>
+
+  <div class="book-gallery" id="bookGallery" role="dialog" aria-modal="true" aria-labelledby="bookGalleryTitle" aria-hidden="true">
+    <div class="book-gallery__inner" role="document">
+      <button type="button" class="book-gallery__close" id="closeBookGallery" aria-label="Cerrar book">×</button>
+
+      <header class="book-gallery__head">
+        <p class="book-gallery__kicker">Book actoral</p>
+        <h2 class="book-gallery__title" id="bookGalleryTitle">Galería completa</h2>
+        <p class="book-gallery__count" id="bookGalleryCount"></p>
+      </header>
+
+      <div class="book-gallery__grid" id="bookGalleryGrid"></div>
+    </div>
+
+    <div class="book-gallery__lightbox" id="bookLightbox" aria-hidden="true">
+      <button type="button" class="book-gallery__lightbox-close" id="closeBookLightbox" aria-label="Cerrar imagen">×</button>
+      <button type="button" class="book-gallery__lightbox-nav book-gallery__lightbox-nav--prev" id="bookLightboxPrev" aria-label="Imagen anterior">‹</button>
+      <button type="button" class="book-gallery__lightbox-nav book-gallery__lightbox-nav--next" id="bookLightboxNext" aria-label="Imagen siguiente">›</button>
+      <figure class="book-gallery__lightbox-figure">
+        <img id="bookLightboxImg" alt="" />
+        <figcaption class="book-gallery__lightbox-caption" id="bookLightboxCaption"></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="eval-modal" id="evalModal" role="dialog" aria-modal="true" aria-labelledby="evalModalTitle" aria-hidden="true">
+    <div class="eval-modal__inner" role="document">
+      <button type="button" class="eval-modal__close" id="closeEvalModal" aria-label="Cerrar evaluación">×</button>
+
+      <header class="eval-modal__header">
+        <span class="eval-modal__badge" id="evalModalBadge">Par</span>
+        <h2 class="eval-modal__title" id="evalModalTitle">Nombre</h2>
+        <p class="eval-modal__role" id="evalModalRole">Rol</p>
+        <p class="eval-modal__ornament" aria-hidden="true">· · ·</p>
+      </header>
+
+      <div class="eval-modal__body" id="evalModalBody"></div>
+    </div>
+  </div>
+
+  <div class="book-modal" id="autoevalBook" role="dialog" aria-modal="true" aria-labelledby="autoevalBookTitle" aria-hidden="true">
+    <div class="book-modal__inner" role="document">
+      <button type="button" class="book-modal__close" id="closeAutoevalBook" aria-label="Cerrar autoevaluación">×</button>
+
+      <header class="book__header">
+        <p class="book__kicker">Autoevaluación · Una memoria</p>
+        <h2 class="book__title" id="autoevalBookTitle">Cambio de vida</h2>
+        <p class="book__author">Annia Victoria García Páez</p>
+        <p class="book__ornament" aria-hidden="true">· · ·</p>
+      </header>
+
+      <div class="book__body">
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo I</span>
+          Entrar a la carrera
+        </h3>
+        <p>Mi paso por la carrera no ha sido lineal. Ha sido un proceso de transformación constante en el que he tenido que moverme, incomodarme y cuestionar profundamente lo que creía que debía ser una artista, para empezar a construir quién soy y desde dónde creo.</p>
+        <p>Ingresé con el deseo de ser bailarina. En primer y segundo semestre cursé Principios de la danza, donde tomé ballet y danza contemporánea. Estos espacios me dieron disciplina, rigor y una primera conciencia corporal, pero también me enfrentaron a una sensación constante de no encajar. Me sentí débil, frustrada, habité la rabia y la incomodidad frente a un estándar corporal profundamente eurocentrista. Empecé a preguntarme quién había definido ese ideal de cuerpo, por qué eso era “lo correcto” y por qué dolía tanto intentar encajar ahí.</p>
+        <p>Yo, desde mi cuerpo latino, habitaba un lenguaje que se suponía universal, pero nunca sentí que perteneciera ahí. Al mismo tiempo, mis clases de actuación y somática empezaban a llamarme más la atención, aunque todo me asustaba. Era tímida. Dudaba de mí constantemente. No tenía una convicción clara de estar en el lugar correcto. Fueron semestres llenos de preguntas, de lágrimas, de exigencia, de bitácoras, de memoria corporal, de intentar entender la energía, el personaje, el cuerpo… todo al mismo tiempo. En medio de esta avalancha de cuestionamientos y sentimientos llegué al ciclo profesional.</p>
+        <p>Al iniciar el ciclo profesional, en tercer semestre, intenté continuar con danza contemporánea por recomendación del maestro Arnulfo Pardo, pero al no lograr inscribir la materia tomé Somática de oriente (yoga) con los maestros Rafael Nieves y Alejandro Convers. Paralelamente cursé el Laboratorio de composición de texto dramático con la maestra María Adelaida Palacio y la materia de Iluminación con la profesora Claudia Tobón.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo II</span>
+          El yoga: mirar hacia adentro
+        </h3>
+        <p class="book__pull">Ese semestre me cambió la vida, pero también fue profundamente doloroso.</p>
+        <p>Por un lado, el yoga me abrió completamente. Me obligó a cerrar los ojos y mirar hacia adentro, a encontrarme conmigo misma de una forma que nunca había experimentado. Empecé a darme cuenta de que yo era mucho más compleja de lo que creía, que había un mundo interno lleno de pensamientos, emociones y heridas que no había querido ver. Aprendí a respirar, a regularme, a escucharme. Pero ese mismo proceso también me llevó a encontrarme con mis partes más oscuras. El monólogo interno que empezó a aparecer en mí era fuerte, doloroso, insistente. Me costaba meditar porque lo que encontraba al cerrar los ojos no era calma, era confrontación. Era reconocer mis dolores más profundos. Y en ese mismo momento estaba cursando iluminación.</p>
+        <p>Mi experiencia en la clase de Claudia Tobón fue muy difícil. No entendía la materia, no lograba conectar con la forma en que se enseñaba y, en lugar de encontrar guía, me encontré con palabras muy violentas hacia mí. Me sentí tratada como una persona incapaz, me dijeron cosas ofensivas que reforzaron ese monólogo interno negativo que ya venía creciendo. Ese espacio no fue formativo para mí desde el cuidado, sino desde la herida.</p>
+        <p>Todo se juntó: el proceso interno que estaba viviendo, la exigencia académica, la forma en la que fui tratada en clase. Empecé a tener pensamientos muy oscuros, incluso ideas suicidas. Esto no apareció de la nada, venía de procesos anteriores desde la pandemia, pero en ese semestre todo se intensificó. Y en medio de eso, el yoga fue lo único que me sostuvo. El yoga me salvó la vida. Me dio un lugar para respirar cuando no podía más. Me dio herramientas para no perderme completamente en mi propia mente. Me enseñó que el diálogo interno puede transformarse, que puedo hablarme distinto, que puedo habitarme con más amor.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo III</span>
+          La danza y la soledad
+        </h3>
+        <p>Al mismo tiempo, en ese mismo semestre, sin darme cuenta, estaba entrando en una relación que se volvería profundamente tóxica y que atravesaría varios años de mi carrera. Una relación que me confrontó, que me desbordó, que me mostró versiones de mí que no conocía. Todo esto empezó ahí, mientras yo estaba en yoga, mientras estaba descubriendo quién era. Fue un momento de inmersión total en mí. No desde el ego, sino desde el reconocimiento.</p>
+        <p>En cuarto y quinto semestre retomé la danza. No quería dejar de lado ese sueño de ser bailarina y, siendo muy honesta, también me atravesaba una ansiedad social muy fuerte. El grupo con el que había entrado a la carrera —que en su mayoría venía de la danza— seguía siendo un punto de referencia para mí, y aunque no éramos los más cercanos, me aferré a ellos en primer y segundo semestre. En tercero me separé completamente y tomé mis propias decisiones, pero al llegar a cuarto apareció una sensación de vacío, como de “qué embarrada no haber estado con ellos”.</p>
+        <p>Entonces tomé una decisión que hoy entiendo mejor: me metí a jazz y tap, en parte por intuición artística, pero también porque quería volver a verlos, no sentirme sola.</p>
+        <p>En esa materia, particularmente en tap, encontré algo muy especial. Me iba bien, lo disfrutaba profundamente. El sonido, el ritmo, esa conexión con lo auditivo me hacía feliz. Había algo muy vivo en esa relación entre cuerpo y sonido que también se conectaba con lo que estaba explorando en Laboratorio de creación artística con la maestra Laura Wiesner, donde empezábamos a indagar en el sonido como material creativo, en sus posibilidades infinitas dentro de la escena. Pero al mismo tiempo que disfrutaba, aparecía otra pregunta mucho más grande. ¿Por qué, aunque la pasaba bien, aunque había momentos de gozo real, algo en mí seguía diciendo: esto no es? Volví a sentir ese lugar incómodo frente a la danza: la competencia de egos, la comparación constante, la presión. Y con el tiempo entendí que no era solo el espacio externo, también era mi propio miedo. Mi miedo profundo a la soledad.</p>
+        <p>Yo no soy una persona a la que le guste estar sola. Y ese semestre me mostró eso con mucha claridad. Me di cuenta de que muchas de mis decisiones —como inscribirme en esas materias— no venían únicamente desde el deseo artístico, sino también desde la necesidad de pertenecer, de no quedarme sola, de estar con alguien conocido, de sentirme acompañada. Y eso me confrontó muchísimo.</p>
+        <p>Porque al mismo tiempo había algo en mí que se resistía. Algo que decía: me importa mi proceso, me importa lo que quiero hacer, y no voy a dejar que mi círculo social decida por mí. Entonces vivía en esa tensión constante: entre querer pertenecer y querer ser fiel a mí misma.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo IV</span>
+          Aprender a estar sola
+        </h3>
+        <p>Llegó un punto, especialmente en semestres más adelante como el séptimo, en el que tuve que enfrentar directamente la soledad. Almorzar sola. Sentarme conmigo. Llorar. No tener a nadie al lado. Y eso fue doloroso, profundamente doloroso. Pero también fue liberador. Porque en ese enfrentamiento con la soledad empecé a encontrarme de verdad. A entender que puedo estar conmigo. Que no necesito pertenecer a un grupo para existir. Que puedo elegir desde mí. Y que el arte, la terapia, los procesos personales —como el acompañamiento con mi psicóloga Ana Aguirre— me estaban dando herramientas reales para sostenerme.</p>
+        <p>En quinto semestre, al tomar la técnica básica de danza tradicional con los maestros René Arriaga y Karina García entré en el universo de las danzas del Pacífico y en general de las danzas colombianas, vuelvo a encontrar belleza en la danza, pero desde otro lugar, reconozco cómo bailar profesionalmente la carranga que es la danza de mi tierra, de Boyacá. Me imaginé a mi abuelita bailando la guabina chiquinquireña, y también a mi mamita que nació en Chiquinquirá. Conecté con esta materia desde la raíz, desde lo cultural, desde lo colectivo. Y, aun así, la pregunta seguía: ¿este es mi camino?</p>
+        <p>Y la respuesta, poco a poco, se iba haciendo más clara. No desde el rechazo a la danza, porque la sigo amando profundamente, sino desde la comprensión de que no quería habitarla en espacios atravesados por la competencia, el ego y la desconexión por la presión externa. Todo este proceso me fue llevando, sin darme cuenta, hacia algo más grande.</p>
+        <p>Porque mientras todo esto pasaba, mi vida personal también estaba atravesando procesos muy fuertes: la relación con mi familia, con mi papá, con mi mamá, la relación tóxica en la que estaba entrando, y una confrontación emocional cada vez más profunda conmigo misma.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo V</span>
+          Suzuki: encontrar la fuerza
+        </h3>
+        <div class="book__chapter-flow">
+          <div class="book__chapter-flow__col">
+            <p>En ese mismo semestre ocurre algo que lo transforma todo. Conozco la técnica básica de Suzuki y viewpoints con el maestro Ernesto Martínez Correa. Y eso me cambia la vida de nuevo.</p>
+            <p>En ese momento yo ya venía completamente consumida emocionalmente, perdida en muchos sentidos, con una autoestima muy golpeada. Y en medio de todo eso, Suzuki aparece como un lugar de fuerza. Ahí encontré poder. Encontré presencia. Encontré una forma de habitar mi cuerpo con dignidad. Mientras la danza tradicional me conectaba con lo colectivo, Suzuki me conectó conmigo misma de una forma brutal. Me hizo sentir poderosa cuando más débil me sentía. Me hizo darme cuenta de que mi cuerpo era una fuente de energía, de voz, de presencia.</p>
+          </div>
+          <div class="book__chapter-flow__col">
+            <p>Y en ese momento todo empezó a conectarse: el yoga me había abierto hacia adentro. Suzuki me dio estructura y fuerza desde el cuerpo. Y en paralelo, cursaba el ensamble de Soundpainting con el maestro David Moncada. Había algo en el juego, en la escucha, en la creación en tiempo real que me estaba llamando profundamente. Soundpainting fue ese primer lenguaje donde empecé a tomar decisiones en escena sin miedo, donde entendí que podía proponer, fallar, volver a intentar y disfrutar el error, aprender de él, construir.</p>
+          </div>
+        </div>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo VI</span>
+          La semilla feminista
+        </h3>
+        <p>En este punto de mi proceso, donde empiezo a encontrarme con la improvisación, con el juego, con el error como posibilidad y con la construcción colectiva desde la escucha, siento la necesidad de detenerme y nombrar algo que ha atravesado todo este camino y que no puedo dejar por fuera.</p>
+        <p>No puedo hablar de mi proceso artístico sin hablar de mi experiencia como mujer, porque muchas de las preguntas que sostienen mi trabajo nacieron ahí.</p>
+        <p>En tercer semestre, además de Somática de oriente (yoga) y el Laboratorio de composición de texto dramático con la maestra María Adelaida Palacio, cursé Cuerpo y nuevos medios con la maestra Eloisa Jaramillo.</p>
+        <p class="book__pull">Ese espacio fue mi primer acercamiento consciente a una mirada feminista dentro de la creación.</p>
+        <p>Ahí escribí un poema feminista por primera vez e hice body painting con una intención política y crítica con respecto a la violencia sobre el cuerpo de la mujer. Empecé a darme cuenta de que me interesaba hablar de las mujeres, de sus cuerpos, de la violencia que las atraviesa. No lo tenía completamente claro, pero había algo que resonaba profundamente conmigo, algo que ya venía desde mi historia personal, desde experiencias de violencia sexual que habían marcado mi infancia y mi adolescencia, aunque en ese momento no lo nombrara del todo.</p>
+        <p>Recuerdo que al terminar la clase Eloisa me dijo algo que se me quedó grabado: “ahí hay una semillita”. Y ella tenía razón. Esa semilla crece en cuarto semestre, cuando vuelvo a ver la puesta en escena de Cuerpo y nuevos medios, esta vez con la maestra Juanita Delgado. Ese espacio me abre completamente la perspectiva de género junto con mi materia electiva de música, mujeres y género.</p>
+        <p>Empiezo a leer sobre feminismo, a cuestionar todo lo que creía normal, a mirar el cuerpo de otra manera. Escribo textos, veo referentes, y ahí conozco a Nadia Granados. Voy a ver su performance «La Fulminante» en la Galería Santa Fe y me impacta profundamente. Su trabajo, su radicalidad, su forma de usar el cuerpo sin censura, sin miedo, me atraviesa completamente. Ahí entendí algo muy claro: ese es el tipo de arte que yo quiero hacer.</p>
+        <p>En esa clase con Juanita hago un performance donde me desnudo en escena. Escribo desde la rabia, desde la incomodidad, desde todo lo que había vivido y que no había podido poner en palabras. Empiezo a ver el cuerpo femenino no como objeto, sino como un lugar de enunciación, como un espacio político. Y ahí pasa algo muy fuerte: me vuelvo profundamente consciente de la violencia de género en mi vida como algo que me ha atravesado desde siempre. Desde la infancia, desde la adolescencia, desde mi relación de pareja en ese momento. Todo empieza a hacer sentido. Empiezo a enamorarme del feminismo. Del cuerpo femenino. De la feminidad. De las mujeres. Abrazo mi bisexualidad y me re descubro dentro de ella reconociendo que amar y desear una mujer no es negativo desde ninguna perspectiva que lo analice, es decir, no es negativo netamente por ser mujer. Y me admití a mí misma que estaba enamorada de una mujer. Pero bueno, eso es otra historia.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo VII</span>
+          Pronoia: sostener sola
+        </h3>
+        <p>Durante esos mismos semestres el proceso de mi ensamble de danza «Pronoia» dirigido por los maestros Oscar Cortes y Camila Sierra coincide exactamente con el momento en el que mi chispa feminista empieza a encenderse con más fuerza. Yo venía escribiendo textos atravesados por preguntas sobre las mujeres, sobre mis ancestras, sobre mis abuelas, sobre el cuerpo femenino, sobre la violencia, sobre la memoria. Todo lo que estaba descubriendo en Cuerpo y nuevos medios con Eloisa Jaramillo y posteriormente con Juanita Delgado empezó a convertirse en materia prima para crear. Y de repente, por coincidencias del destino, el ensamble empieza a vaciarse. Las personas se salen porque no confían en el proceso, porque esperaban otra cosa, porque era un espacio no convencional, porque no entendían hacia dónde iba la propuesta. Y yo me quedo completamente sola. Y aunque al principio eso me llenó de miedo, terminó convirtiéndose en uno de los momentos más importantes de toda mi carrera. Porque tuve que sostenerlo. Tuve que creer. Tuve que confiar en mí misma.</p>
+        <p>El ensamble terminó convirtiéndose en una puesta en escena de aproximadamente cincuenta minutos que sostuve sola, en el jardín de Teología, con mi cuerpo, mi energía, mis textos y mis convicciones. Y para ese momento yo ya había pasado por la técnica básica de Suzuki con Ernesto, entonces algo en mí ya había despertado. Ya sabía cómo sostener la energía. Ya sabía cómo ocupar el espacio. Ya sabía cómo respirar dentro del cansancio y del miedo. Y ahí entendí algo profundamente importante: soy una mujer poderosa.</p>
+        <p>Entendí que puedo sostener una escena, una idea, una creación completa. Que puedo hablar duro. Que mis preguntas tienen valor. Que mis textos tienen potencia. Que el arte que quiero hacer existe y tiene lugar. Ese ensamble me enseñó que para ejecutar cualquier cosa que quiera construir necesito convicción, fe, disciplina y amor profundo por lo que hago.</p>
+        <p class="book__pull">Y también me enseñó algo que no he olvidado desde entonces: este lugar también es mío, ya no quiero nombrar a mi cuerpo, sino cuerpa, femenina, poderosa, mujer, mía.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo VIII</span>
+          La improvisación
+        </h3>
+        <p>En quinto semestre vuelvo a ver Cuerpo y nuevos medios con Mateo Mejía, pero ahí decido moverme hacia otro lugar. Siento que ya había tocado una fibra muy intensa y quería explorar otras cosas, abrir otras preguntas, no quedarme únicamente en ese eje, aunque ya sabía que esa línea —la de la cuerpa, las mujeres y la violencia— iba a quedarse conmigo para siempre.</p>
+        <p>Ese quinto semestre fue una bisagra. Porque, aunque seguía en danza, ya no era el centro. El centro empezaba a moverse hacia otro lugar.</p>
+        <p>En sexto semestre ese movimiento se vuelve claro. Curso técnica de improvisación teatral con el maestro Leonardo Caicedo Saza, y ahí entiendo que esto no es solo algo que me gusta: esto es un lenguaje en el que quiero profundizar. La improvisación me cambia la vida (sé que he dicho esto como cuatro veces, pero en serio el arte cada vez que quiere me cambia la vida totalmente, cada una de sus líneas y formas).</p>
+        <p>La improvisación me enseña a estar presente, a escuchar, a confiar en lo que aparece, a sostener la escena desde lo que soy y no desde lo que debería ser. Me confronta, me reta, me expone, pero también me da una libertad que no había encontrado en otros espacios.</p>
+        <p>Aunque también tomo actuación para la cámara, ese no fue un espacio que marcara mi proceso de forma determinante. Mi energía, mi interés y mi transformación estaban completamente volcados hacia la improvisación. Ahí empieza a consolidarse algo en mí.</p>
+        <p>En séptimo semestre continúo este proceso en el ensamble de improvisación teatral llamado «Noche de Lobo» con Leonardo Caicedo. Y es ahí donde todo lo aprendido empieza a tomar forma.</p>
+        <p>Como él mismo señala en su coevaluación, desde mis primeras intervenciones se evidenciaba una presencia escénica singular, una creatividad orgánica y una capacidad de generar recordación en el espectador, algo que él nombra como “duende”. Esa cualidad, que no es técnica pura ni completamente explicable, se volvió una base importante en mi trabajo. Pero ese proceso también tuvo quiebres. En el formato match atravesé una frustración profunda. El trabajo colectivo no fluía, no había cohesión, y eso me afectó directamente. Me sentí bloqueada, insegura, perdí confianza en mí misma por momentos.</p>
+        <p>Sin embargo, ese quiebre fue necesario. Porque ahí entendí realmente la improvisación: la escucha, la construcción colectiva, la generosidad escénica, la importancia de sostener a otros y no solo brillar individualmente. A partir de ese momento, mi lugar dentro del grupo y de la impro cambia. Empiezo a liderar desde lo creativo. A apoyar a otros. A cuestionar desde un lugar constructivo. Me convierto en una presencia dentro del ensamble que no solo propone, sino que sostiene.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo IX</span>
+          El arte como refugio
+        </h3>
+        <p>Ahora mirando mi proceso con distancia, me doy cuenta de algo muy fuerte: las cosas que más me cambiaron la vida fueron también las cosas que me sostuvieron cuando sentía que no podía más.</p>
+        <div class="book__litany">
+          <p>Por eso el yoga me cambió la vida.</p>
+          <p>Por eso Suzuki me cambió la vida.</p>
+          <p>Por eso la improvisación me cambió la vida.</p>
+        </div>
+        <p>Porque el arte aparecía exactamente en los momentos en los que yo sentía que todo se estaba acabando. Mientras cursaba improvisación teatral, estaba enfrentando simultáneamente todo el proceso judicial y familiar derivado de la violencia sexual ejercida por Jhon Bustos, mi excuñado. Mi familia estaba completamente fracturada. Había discusiones, silencios, dolor, culpa, procesos legales, tensión psicológica y emocional todo el tiempo. Sentía que todo se estaba yendo a la mierda. Y, aun así, yo seguía improvisando. Improvisaba en escena, improvisaba emocionalmente, improvisaba la vida.</p>
+        <p>Aunque en un juzgado no se puede improvisar demasiado, yo sentía que estaba intentando sostenerme improvisando cada día, aprendiendo a reaccionar frente a lo inesperado, a escuchar, a responder, a no paralizarme completamente frente al caos. Y en medio de todo eso, la universidad se convirtió en mi casa. Yo no quería volver a mi casa real porque ahí estaba el dolor. Estaba la ruptura familiar. Estaba la violencia. Estaba la sensación constante de derrumbe después de que mi cuñado abusara sexualmente de mí y todo explotara. Entonces me quedaba en la universidad.</p>
+        <p>Habitaba los salones, los ensambles, los entrenamientos, las clases, los pasillos. El arte se convirtió en un refugio, pero también en algo más profundo: en una forma de seguir viva. No porque el arte solucionara mis problemas, sino porque me daba algo que yo había perdido: confianza, tranquilidad y alegría. Me obligaba a respirar. A escuchar. A moverme. A estar aquí.</p>
+        <p>Y ahora entiendo que muchas de las cosas que más marcaron mi carrera no me transformaron solamente por su contenido académico o técnico, sino porque llegaron en el momento exacto en el que yo más necesitaba encontrarme conmigo misma.</p>
+        <p>Y todo eso —la danza, la soledad, el miedo, la intuición, el dolor— fue lo que me fue llevando, poco a poco, hacia donde realmente tenía que estar.</p>
+        <p>La técnica básica de Suzuki y la improvisación fueron y siguen siendo un lugar de sostén. Suzuki, con su exigencia física, su conexión con la energía y la presencia me permitió encontrar fuerza en mi cuerpo cuando mentalmente estaba rota. La improvisación, por su parte, me permitió volver a jugar, a escuchar, a estar presente. Ambas prácticas se convirtieron en lugares donde podía existir sin juicio. Donde podía reconstruirme. Donde podía volver a elegir vivir. Porque sí, hubo momentos en los que estuve muy cerca de no querer seguir. Y en medio de todo eso, el arte apareció una y otra vez. No como terapia en el sentido clínico, sino como un espacio donde me encontré conmigo misma. Donde entendí que mi cuerpo no era un problema, que mi voz tenía lugar, que podía sostenerme incluso cuando todo parecía derrumbarse.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Capítulo X</span>
+          ImproFéminas
+        </h3>
+        <p>Gracias a la improvisación y a Leo cursé el Diplomado Internacional de Improvisación teatral (2025), dirigido por Gigio Giraldo, con maestras y maestros como Pilar Villanueva, Mark Jane, Lisa Lynn y Valery Ward.</p>
+        <p>Ese diplomado me cambió la vida (otra vez). Entendí que la improvisación es infinita, técnica, profunda. Que sirve para todo. Que es estar vivo, presente, escuchando. Me volví completamente obsesiva con la improvisación. Ahí entendí que eso definitivamente era lo mío.</p>
+        <p>Mi proceso artístico se vuelve definitivamente político. Todo se conecta: Suzuki, el cuerpo, la energía, la improvisación, la política. Las mujeres. La feminidad.</p>
+        <p>En la carrera también observo dinámicas de poder constantes: profesores que aplastan, egos que dominan, validación del hombre por encima de la mujer, interrupciones, jerarquías, violencia disfrazada de exigencia. También veo algo más fuerte: el abuso de poder en espacios donde la cuerpa está expuesta. Maestros que aprovechan su posición, dinámicas de manipulación, grooming. El artista con poder, dinero, fama, haciendo lo que quiere con mujeres que solo quieren aprender. Eso me molesta demasiado. Me posiciona en una forma de hacer con un propósito específico.</p>
+        <p>De ahí nace ImproFéminas. Mi grupo. Mi espacio. Conformado por Laura Lancheros, Paula Hernández, Valeria Álvarez, Francisca Restrepo y yo. Dos veces por semana desde hace 8 meses nos encontramos, nos elegimos, construimos juntas. Lloramos, reímos, entrenamos, soñamos. Empezamos a crear formatos como Menú y Oráculo, hacemos entrenamiento de match, vamos a participar en el match nacional de este año. Ya pagamos la inscripción. Vamos a estar participando y compitiendo en la zona norte, aunque aún no sabemos si vamos para Bucaramanga o Barranquilla. Nos presentaremos en un open mic de artistas en Tertulia librería café este 12 de mayo con otros artistas y, en general, en eso vamos, apoyándonos mucho, gestionando, entrenando. Ellas no lo saben, pero hacen parte de un sueño que tengo desde que empecé a improvisar: tener mi espacio femenino artístico. Cada domingo voy feliz a la casa de Fran, aunque a veces llego tarde, pero siento tranquilidad cuando las veo reír, y cuando las veo preocuparse, cuando las veo llorar y cuando comparten sus vidas conmigo. Ojalá si un día leen esto sepan que las quiero y las valoro muchísimo, y que espero que esto sea el inicio de cosas mucho más grandes para nosotras.</p>
+        <p>ImproFéminas es eso. Un espacio donde la improvisación se construye desde la escucha, desde el cuidado, desde una mirada feminista. También surge a partir de experiencias reales, incluso de acoso dentro de espacios de improvisación. Tenemos planes de improvisar con enfoque de género también.</p>
+
+        <h3 class="book__chapter-title">
+          <span class="book__chapter-num">Epílogo</span>
+          Esto apenas comienza
+        </h3>
+        <p>Finalmente, esa soy yo. Hoy mi práctica es clara: soy una artista que trabaja desde la cuerpa, desde la improvisación y desde una posición política feminista.</p>
+        <p>He transitado de la danza a la actuación, y de ahí a la improvisación. Y en la improvisación encontré todo: presencia, escucha, creación, verdad. Hace poco gané la batalla de las estrellas, una competencia de improvisación dirigida y producida por Jhonattan Lozano, y ahí estuvieron todos los que me han apoyado siempre para celebrar mi pequeño primer gran logro.</p>
+        <p>A puertas de graduarme, siento que esto apenas comienza.</p>
+        <p>Quiero seguir profundizando en la improvisación, seguir creando desde la cuerpa, seguir cuestionando las estructuras del arte, seguir construyendo espacios donde otras mujeres también puedan habitarse sin miedo.</p>
+        <p>En julio empiezo mi segundo diplomado de improvisación con enfoque en improvisación gestual, que va muy de la mano con la técnica de teatro gestual que cursé con el maestro Leonardo Martínez en mi último semestre y en la cual, a propósito, también trabajé solo con mujeres en mis grupos y confirmé lo maravillosas, creativas y poderosas que son en escena.</p>
+        <p>Por último, solo quiero ver el proceso desde arriba, así como nos sugirió Nata Orozco en el ensamble de escrituras, y les digo que tiene una forma muy extraña, pero solo siento amor y gratitud con él. Que estoy profundamente agradecida con mi cuerpa, con mis amigos y amigas, con mis maestros, con los salones, con el linóleo, con las lágrimas, con mi mamá… con mis gatos.</p>
+        <p class="book__pull book__pull--final">Gracias, gracias, gracias infinitas a esta inmersión, al arte que me encontró y yo lo encontré, y nos abrazamos tan profundo que me cambió la vida para siempre.</p>
+      </div>
+
+      <p class="book__sign">— Annia Victoria García Páez</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
