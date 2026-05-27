@@ -90,6 +90,17 @@
 
           <span class="hero__photo-burst" aria-hidden="true"></span>
 
+          <button type="button" class="hero__photo-expand" id="reelExpand" aria-label="Ver video en grande" aria-pressed="false">
+            <span class="hero__photo-expand-icon" aria-hidden="true">
+              <svg class="icon icon--enter" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M5 5h6v2H7v4H5V5zm14 0v6h-2V7h-4V5h6zM5 19v-6h2v4h4v2H5zm14 0h-6v-2h4v-4h2v6z"/>
+              </svg>
+              <svg class="icon icon--exit" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M11 5H9v4H5v2h6V5zm2 14h2v-4h4v-2h-6v6zm6-10h-4V5h-2v6h6V9zM5 13v2h4v4h2v-6H5z"/>
+              </svg>
+            </span>
+          </button>
+
           <div class="hero__photo-progress" id="reelProgress" role="slider" aria-label="Línea de tiempo del reel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
             <div class="hero__photo-progress-track">
               <div class="hero__photo-progress-buffered" id="reelProgressBuffered"></div>

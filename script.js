@@ -25,6 +25,7 @@
     initGallery();
     initReelSound();
     initReelProgress();
+    initReelExpand();
     initAutoevalBook();
     initEvals();
     initBookGallery();
@@ -280,6 +281,42 @@
 
     refresh();
     updateBuffered();
+  }
+
+  function initReelExpand() {
+    const frame = $('#reelFrame');
+    const btn = $('#reelExpand');
+    if (!frame || !btn) return;
+
+    let backdrop = $('#reelBackdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'reelBackdrop';
+      backdrop.className = 'reel-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
+    const setExpanded = (on) => {
+      frame.classList.toggle('is-expanded', on);
+      document.body.classList.toggle('is-reel-expanded', on);
+      document.body.classList.toggle('is-locked', on);
+      btn.setAttribute('aria-pressed', String(on));
+      btn.setAttribute('aria-label', on ? 'Cerrar vista expandida' : 'Ver video en grande');
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setExpanded(!frame.classList.contains('is-expanded'));
+    });
+
+    backdrop.addEventListener('click', () => setExpanded(false));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && frame.classList.contains('is-expanded')) {
+        e.stopPropagation();
+        setExpanded(false);
+      }
+    });
   }
 
   function initAutoevalBook() {
