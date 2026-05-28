@@ -30,8 +30,8 @@
     <nav class="nav__menu" id="navMenu" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#declaracion">Declaración</a>
       <a href="#autoevaluacion">Autoevaluación</a>
+      <a href="#declaracion">Declaración</a>
       <a href="#galeria">Galería</a>
       <a href="#book">Book</a>
       <a href="#evaluaciones">Evaluaciones</a>
@@ -148,19 +148,7 @@
           <p class="section__kicker">Sobre mí</p>
           <h2 class="section__title">Cuerpa, voz y memoria<br/><em>al servicio del escenario.</em></h2>
 
-          <p>
-            Soy artista escénica formada en la <strong>Pontificia Universidad
-            Javeriana de Bogotá</strong>. Mi práctica nace de la improvisación,
-            el cuerpo y la creación escénica como espacios de <em>presencia y
-            resistencia</em>. Mi búsqueda atraviesa preguntas sobre las mujeres,
-            la memoria y las formas en las que el cuerpo guarda, resiste y
-            transforma lo vivido.
-          </p>
-          <p>
-            Creo en una escena donde el cuerpo habla antes que la palabra;
-            un territorio <em>político, sensible y profundamente humano</em>.
-          </p>
-
+          <p class="about__tags-label">Disciplinas que entreno</p>
           <ul class="about__tags">
             <li>Improvisación</li>
             <li>Suzuki</li>
@@ -170,6 +158,69 @@
             <li>Teatro gestual</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section class="selfeval" id="autoevaluacion">
+      <div class="selfeval__head">
+        <p class="section__kicker">Autoevaluación</p>
+        <h2 class="section__title">Lo que <em>sostengo</em>, lo que <em>busco</em>.</h2>
+        <p class="selfeval__intro">
+          Una mirada honesta sobre el lugar desde donde trabajo hoy y sobre lo
+          que sigo entrenando.
+        </p>
+      </div>
+
+      <div class="selfeval__grid">
+
+        <article class="evalcard evalcard--strong">
+          <span class="evalcard__num">01</span>
+          <h3 class="evalcard__title">El camino</h3>
+          <p class="evalcard__lead">De la danza a la improvisación, sin línea recta.</p>
+          <ul class="evalcard__list">
+            <li>Entré queriendo ser bailarina y descubrí que mi cuerpo latino no encajaba en un estándar eurocentrista.</li>
+            <li>Pasé por ballet, contemporáneo, jazz, tap y danzas tradicionales antes de encontrar mi lenguaje.</li>
+            <li>Aprendí a estar sola, a no dejar que el grupo decidiera por mí y a confiar en mi proceso.</li>
+            <li>Sigo amando la danza, pero ya no la habito desde la competencia ni desde el ego.</li>
+          </ul>
+        </article>
+
+        <article class="evalcard evalcard--growth">
+          <span class="evalcard__num">02</span>
+          <h3 class="evalcard__title">Lo que me sostiene</h3>
+          <p class="evalcard__lead">Tres prácticas que me cambiaron la vida.</p>
+          <ul class="evalcard__list">
+            <li>El yoga me enseñó a respirar, a regularme y a hablarme distinto.</li>
+            <li>Suzuki me devolvió fuerza, estructura y presencia cuando estaba rota por dentro.</li>
+            <li>La improvisación me dio escucha, juego y el permiso de equivocarme en escena.</li>
+            <li>Cuerpo y nuevos medios fue la semilla feminista que ya no se fue.</li>
+          </ul>
+        </article>
+
+        <article class="evalcard evalcard--next">
+          <span class="evalcard__num">03</span>
+          <h3 class="evalcard__title">Hacia dónde voy</h3>
+          <p class="evalcard__lead">Improvisación, cuerpa y posición política.</p>
+          <ul class="evalcard__list">
+            <li>Soy una artista que trabaja desde la cuerpa, la improvisación y una mirada feminista.</li>
+            <li>ImproFéminas: mi espacio con cinco mujeres para entrenar, crear y competir desde el cuidado.</li>
+            <li>En julio empiezo mi segundo diplomado, con enfoque en improvisación gestual.</li>
+            <li>Quiero seguir abriendo lugares donde otras mujeres puedan habitarse sin miedo.</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="selfeval__deeper">
+        <p class="selfeval__deeper-text">
+          Detrás de estas tres tarjetas hay un proceso largo. Escribí la
+          autoevaluación completa como un recorrido por todo lo que cambió
+          en mí desde primer semestre hasta hoy.
+        </p>
+        <button type="button" class="btn btn--primary selfeval__deeper-btn" id="openAutoevalBook" aria-haspopup="dialog" aria-controls="autoevalBook">
+          <span>Leer mi proceso completo</span>
+          <span class="selfeval__deeper-arrow" aria-hidden="true">→</span>
+        </button>
       </div>
     </section>
 
@@ -245,69 +296,6 @@
         </div>
 
         <p class="manifesto__sign">— Annia Victoria García Páez</p>
-      </div>
-    </section>
-
-    <section class="selfeval" id="autoevaluacion">
-      <div class="selfeval__head">
-        <p class="section__kicker">Autoevaluación</p>
-        <h2 class="section__title">Lo que <em>sostengo</em>, lo que <em>busco</em>.</h2>
-        <p class="selfeval__intro">
-          Una mirada honesta sobre el lugar desde donde trabajo hoy y sobre lo
-          que sigo entrenando.
-        </p>
-      </div>
-
-      <div class="selfeval__grid">
-
-        <article class="evalcard evalcard--strong">
-          <span class="evalcard__num">01</span>
-          <h3 class="evalcard__title">El camino</h3>
-          <p class="evalcard__lead">De la danza a la improvisación, sin línea recta.</p>
-          <ul class="evalcard__list">
-            <li>Entré queriendo ser bailarina y descubrí que mi cuerpo latino no encajaba en un estándar eurocentrista.</li>
-            <li>Pasé por ballet, contemporáneo, jazz, tap y danzas tradicionales antes de encontrar mi lenguaje.</li>
-            <li>Aprendí a estar sola, a no dejar que el grupo decidiera por mí y a confiar en mi proceso.</li>
-            <li>Sigo amando la danza, pero ya no la habito desde la competencia ni desde el ego.</li>
-          </ul>
-        </article>
-
-        <article class="evalcard evalcard--growth">
-          <span class="evalcard__num">02</span>
-          <h3 class="evalcard__title">Lo que me sostiene</h3>
-          <p class="evalcard__lead">Tres prácticas que me cambiaron la vida.</p>
-          <ul class="evalcard__list">
-            <li>El yoga me enseñó a respirar, a regularme y a hablarme distinto.</li>
-            <li>Suzuki me devolvió fuerza, estructura y presencia cuando estaba rota por dentro.</li>
-            <li>La improvisación me dio escucha, juego y el permiso de equivocarme en escena.</li>
-            <li>Cuerpo y nuevos medios fue la semilla feminista que ya no se fue.</li>
-          </ul>
-        </article>
-
-        <article class="evalcard evalcard--next">
-          <span class="evalcard__num">03</span>
-          <h3 class="evalcard__title">Hacia dónde voy</h3>
-          <p class="evalcard__lead">Improvisación, cuerpa y posición política.</p>
-          <ul class="evalcard__list">
-            <li>Soy una artista que trabaja desde la cuerpa, la improvisación y una mirada feminista.</li>
-            <li>ImproFéminas: mi espacio con cinco mujeres para entrenar, crear y competir desde el cuidado.</li>
-            <li>En julio empiezo mi segundo diplomado, con enfoque en improvisación gestual.</li>
-            <li>Quiero seguir abriendo lugares donde otras mujeres puedan habitarse sin miedo.</li>
-          </ul>
-        </article>
-
-      </div>
-
-      <div class="selfeval__deeper">
-        <p class="selfeval__deeper-text">
-          Detrás de estas tres tarjetas hay un proceso largo. Escribí la
-          autoevaluación completa como un recorrido por todo lo que cambió
-          en mí desde primer semestre hasta hoy.
-        </p>
-        <button type="button" class="btn btn--primary selfeval__deeper-btn" id="openAutoevalBook" aria-haspopup="dialog" aria-controls="autoevalBook">
-          <span>Leer mi proceso completo</span>
-          <span class="selfeval__deeper-arrow" aria-hidden="true">→</span>
-        </button>
       </div>
     </section>
 

@@ -845,10 +845,35 @@ body.is-reel-expanded .hero__photo-sound:hover {
 .about__text p { font-size: 1.05rem; margin: 0 0 18px; }
 .about__text strong { color: var(--burgundy); }
 
+.about__text .section__title {
+  margin-bottom: 48px;
+}
+
+.about__tags-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about__tags-label::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 2px;
+  background: var(--burgundy);
+}
+
 .about__tags {
   list-style: none;
   padding: 0;
-  margin: 28px 0 0;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
